@@ -1,0 +1,17 @@
+:root {
+    --primary: #3DD2CC;
+
+    /* Dark colors */
+    --dark-bg: #191919;
+    --dark-surface: #212121;
+    --dark-text: #FEFEFE;
+    --dark-text-muted: #E8E8E8;
+    --dark-border: #666666;
+
+    /* Light colors */
+    --light-bg: #FEFEFE;
+    --light-surface: #E8E8E8;
+    --light-text: #191919;
+    --light-text-muted: #666666;
+    --light-border: #CCCCCC;
+}
