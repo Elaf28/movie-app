@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from '@/components/ui/input';
 import { useNavigate } from "react-router";
 import { useAuthStore } from '@/Store/zustand/useAuthStore';
+import { Link } from "react-router";
 
 const loginSchema = z.object({
     email: z.string().email("Invalid email"),
@@ -51,27 +52,24 @@ const Login = () => {
             alt="Background"
         />
 
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/20 dark:bg-black/50" />
 
         <div className="relative z-10 flex min-h-screen items-center justify-center lg:justify-end lg:pr-32 p-6">
-            <div style={{ backgroundColor: 'var(--dark-surface)', opacity: 0.9 }} className="backdrop-blur-xl p-10 rounded-3xl w-full max-w-md shadow-2xl border border-white/10">
-
-                <h2 style={{ color: 'var(--dark-text)' }} className="text-3xl font-bold mb-6 text-center">
+            <div  className="bg-card/50 backdrop-blur-xl p-10 rounded-3xl w-full max-w-md shadow-2xl border border-white/10">
+                <h2  className="text-3xl font-bold mb-6 text-center text-foreground">
                     Login
                 </h2>
-
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
                     {/* Email */}
                     <div>
                     <Input
                         placeholder="Email"
-                        className="h-12 !text-lg px-5 rounded-xl"
-                        style={{backgroundColor: 'rgba(255,255,255,0.05)',color: 'var(--dark-text)',borderColor: 'var(--dark-border)'}}
+                        className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                         {...register("email")}
                     />
                     {errors.email && (
-                        <p className="text-red-400 text-xs mt-1">
+                        <p className="text-destructive text-xs mt-1">
                         {errors.email.message}
                         </p>
                     )}
@@ -82,12 +80,11 @@ const Login = () => {
                     <Input
                         type="password"
                         placeholder="Password"
-                        className="h-12 !text-lg px-5 rounded-xl"
-                        style={{backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--dark-text)', borderColor: 'var(--dark-border)'}}
+                        className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                         {...register("password")}
                     />
                     {errors.password && (
-                        <p className="text-red-400 text-xs mt-1">
+                        <p className="text-destructive text-xs mt-1">
                             {errors.password.message}
                         </p>
                     )}
@@ -95,7 +92,7 @@ const Login = () => {
 
                     {/* Error */}
                     {errors.root && (
-                    <p className="text-red-400 text-sm text-center">
+                    <p className="text-destructive text-sm text-center">
                         {errors.root.message}
                     </p>
                     )}
@@ -103,13 +100,17 @@ const Login = () => {
                     <button
                     type="submit"
                     disabled={isSubmitting}
-                    style={{ backgroundColor: 'var(--primary)', color: '#191919' }}
-                    className="w-full font-bold py-3 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg mt-4"
+                    className="w-full font-bold py-3 rounded-xl bg-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg mt-4"
                     >
                         {isSubmitting ? "Loading..." : "Login"}
                     </button>
-
                 </form>
+                <p className="text-center text-md text-black/60 dark:text-muted-foreground mt-4">
+                    Don’t have an account?{" "}
+                    <Link to="/register" className="text-chart-2 font-medium hover:underline">
+                        Create one
+                    </Link>
+                </p>
             </div>
         </div>
         </div>

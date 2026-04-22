@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router';
-
+import { Link } from "react-router";
 const registerSchema = z
     .object({
         name: z
@@ -69,15 +69,14 @@ const Register = () => {
                 alt="Background"
             />
 
-            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 bg-black/20 dark:bg-black/50" />
 
             <div className="relative z-10 flex min-h-screen items-center justify-center lg:justify-end lg:pr-32 p-6">
                 
                 <div 
-                    style={{ backgroundColor: 'var(--dark-surface)', opacity: 0.85 }}
-                    className="backdrop-blur-xl p-10 rounded-3xl w-full max-w-md shadow-2xl border border-white/10"
+                    className="bg-card/50 backdrop-blur-xl p-10 rounded-3xl w-full max-w-md shadow-2xl border border-white/10"
                 >
-                    <h2 style={{ color: 'var(--dark-text)' }} className="text-3xl font-bold mb-6 text-center">
+                    <h2  className="text-3xl font-bold mb-6 text-center text-foreground">
                         Create Account
                     </h2>
 
@@ -86,22 +85,20 @@ const Register = () => {
                         <div className="space-y-1">
                             <Input
                                 placeholder="Name"
-                                style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--dark-text)', borderColor: 'var(--dark-border)' }}
-                                className=" h-12 !text-lg "
+                                className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                                 {...register("name")}
                             />
-                            {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name?.message}</p>}
+                            {errors.name && <p className="text-destructive text-xs mt-1">{errors.name?.message}</p>}
                         </div>
                         
                         {/* email */}
                         <div className="space-y-1">
                             <Input
                                 placeholder="Email"
-                                className="h-12 !text-lg "
-                                style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--dark-text)', borderColor: 'var(--dark-border)' }}
+                                className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                                 {...register("email")}
                             />
-                            {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email?.message}</p>}
+                            {errors.email && <p className="text-destructive text-xs mt-1">{errors.email?.message}</p>}
                         </div>
 
                         {/* pass */}
@@ -109,33 +106,36 @@ const Register = () => {
                             <Input
                                 type="password"
                                 placeholder="Password"
-                                className="h-12 !text-lg "
-                                style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--dark-text)', borderColor: 'var(--dark-border)' }}
+                                className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                                 {...register("password")}
                             />
-                            {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password?.message}</p>}
+                            {errors.password && <p className="text-destructive text-xs mt-1">{errors.password?.message}</p>}
                         </div>
 
                         {/* Confirm pass */}
                         <div className="space-y-1">
                             <Input
                                 type="password"
-                                className="h-12 !text-lg "
+                                className="h-12 !text-lg px-5 rounded-xl bg-white/30 dark:bg-black/5 backdrop-blur-md text-foreground border-white/10"
                                 placeholder="Confirm Password"
-                                style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--dark-text)', borderColor: 'var(--dark-border)' }}
                                 {...register("confirmPassword")}
                             />
-                            {errors.confirmPassword && <p className="text-red-400 text-xs mt-1">{errors.confirmPassword?.message}</p>}
+                            {errors.confirmPassword && <p className="text-destructive text-xs mt-1">{errors.confirmPassword?.message}</p>}
                         </div>
 
                         <button 
                             disabled={isSubmitting}
-                            style={{ backgroundColor: 'var(--primary)', color: '#191919' }}
-                            className="w-full font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] mt-4 shadow-lg"
+                            className="w-full font-bold py-3 rounded-xl bg-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg mt-4"
                         >
                             {isSubmitting ? "Loading..." : "Register"}
                         </button>
                     </form>
+                    <p className="text-center text-md text-black/60 dark:text-muted-foreground mt-4">
+                        Already have an account?{" "}
+                    <Link to="/login" className="text-chart-2 font-medium hover:underline">
+                        Login
+                    </Link>
+                    </p>
                 </div>
             </div>
         </div>
