@@ -6,9 +6,10 @@ import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import MainLayout from './layouts/MainLayout';
-import NotFound404 from './pages/NotFound404';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,15 @@ const router = createBrowserRouter([
         path: 'login',
         element: <Login/>,
       },
+      {
+        path : 'Home',
+        element : <Home />
+      }
     ],
   },
   {
     path: '*',
-    element: <NotFound404 />,
+    element: <NotFound />,
   },
 ]);
 
