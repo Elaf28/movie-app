@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import MainLayout from './layouts/MainLayout';
 import NotFound404 from './pages/NotFound404';
+import MovieDetails from './pages/MovieDetails';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: 'movie',
+        element: <MovieDetails />,
       },
     ],
   },
