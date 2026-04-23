@@ -6,7 +6,7 @@ import { formatRuntime } from "@/utils/movieHelpers";
 function MovieHeader({ movie }) {
   return (
     <>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg font-semibold">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg font-semibold lg:mt-4">
         <h1 className="w-full text-xl font-bold sm:text-2xl sm:font-extrabold md:text-3xl lg:w-auto lg:text-4xl">
           {movie.title}
         </h1>
