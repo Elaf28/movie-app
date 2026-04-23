@@ -1,16 +1,16 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App.jsx';
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import MainLayout from './layouts/MainLayout';
-import NotFound404 from './pages/NotFound404';
-import MovieDetails from './pages/MovieDetails';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import MainLayout from "./layouts/MainLayout";
+import NotFound404 from "./pages/NotFound404";
+import MovieDetails from "./pages/MovieDetails";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     children: [
       // Root Route
@@ -19,18 +19,18 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: 'movie',
+        path: "movie/:id",
         element: <MovieDetails />,
       },
     ],
   },
   {
-    path: '*',
+    path: "*",
     element: <NotFound404 />,
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <TooltipProvider>
       <RouterProvider router={router} />
