@@ -6,28 +6,63 @@ export const useMovieActions = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [userRatings, setUserRatings] = useState({});
 
+  // دالة مساعدة لجلب اليوزر الحالي في أي لحظة
+  const getCurrentUser = () => JSON.parse(localStorage.getItem('user'));
+
+  // دالة لجلب المفاتيح بناءً على يوزر معين
+  const getKeysForUser = (user) => {
+    const userId = user ? user.username : 'guest';
+    return {
+      favKey: `favorites_${userId}`,
+      watchKey: `watchlist_${userId}`,
+      ratingKey: `userRatings_${userId}`,
+      userId
+    };
+  };
+
+  // 1. تحميل البيانات عند البداية
   useEffect(() => {
+    const user = getCurrentUser();
+    const { favKey, watchKey, ratingKey } = getKeysForUser(user);
+    
     const loadData = (key) => JSON.parse(localStorage.getItem(key)) || [];
-    setFavorites(loadData('favorites'));
-    setWatchlist(loadData('watchlist'));
-    setUserRatings(JSON.parse(localStorage.getItem('userRatings')) || {});
+    
+    setFavorites(loadData(favKey));
+    setWatchlist(loadData(watchKey));
+    setUserRatings(JSON.parse(localStorage.getItem(ratingKey)) || {});
   }, []);
 
+  // 2. دالة الـ Toggle
   const toggleAction = useCallback((item, type) => {
+    const user = getCurrentUser(); // بنقرأ اليوزر هنا "فورا" عند الضغط
+    const { favKey, watchKey, userId } = getKeysForUser(user);
+
+    if (!user || userId === 'guest') {
+      alert("Please login to save your list!");
+      return;
+    }
+
     const isFav = type === 'fav';
-    const key = isFav ? 'favorites' : 'watchlist';
+    const storageKey = isFav ? favKey : watchKey;
     const setFn = isFav ? setFavorites : setWatchlist;
 
     setFn(prev => {
       const newList = prev.find(i => i.id === item.id)
         ? prev.filter(i => i.id !== item.id)
         : [...prev, item];
-      localStorage.setItem(key, JSON.stringify(newList));
+      
+      localStorage.setItem(storageKey, JSON.stringify(newList));
       return newList;
     });
   }, []);
 
+  // 3. دالة التقييم
   const handleRate = useCallback((movieId, value) => {
+    const user = getCurrentUser();
+    const { ratingKey, userId } = getKeysForUser(user);
+
+    if (!user || userId === 'guest') return;
+
     setUserRatings(prev => {
       const updated = { ...prev };
       if (updated[movieId] === value) {
@@ -35,7 +70,7 @@ export const useMovieActions = () => {
       } else {
         updated[movieId] = value;
       }
-      localStorage.setItem('userRatings', JSON.stringify(updated));
+      localStorage.setItem(ratingKey, JSON.stringify(updated));
       return updated;
     });
   }, []);
