@@ -12,7 +12,6 @@ const MovieCard = ({ item, actions, isHorizontal = false, isSearchView = false }
   const siteStars = Math.round(siteAverage / 2);
   const percentage = Math.round(siteAverage * 10);
 
-  // --- شكل البحث العريض (List View) ---
   if (isSearchView) {
     return (
       <div className="flex w-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-4 h-[160px] md:h-[200px]">
@@ -25,7 +24,6 @@ const MovieCard = ({ item, actions, isHorizontal = false, isSearchView = false }
           />
         </div>
 
-        {/* البيانات على اليمين */}
         <div className="flex flex-col p-4 flex-grow overflow-hidden">
           <div className="flex justify-between items-start">
             <div>
@@ -45,12 +43,10 @@ const MovieCard = ({ item, actions, isHorizontal = false, isSearchView = false }
             </div>
           </div>
 
-          {/* الوصف (Overview) */}
           <p className="text-gray-600 text-sm mt-3 line-clamp-2 md:line-clamp-3 leading-relaxed">
             {item.overview || "لا يوجد وصف متاح لهذا العمل حالياً..."}
           </p>
 
-          {/* التقييمات في الأسفل */}
           <div className="mt-auto flex items-center gap-3">
              <div className="flex items-center gap-0.5">
                 {[1, 2, 3, 4, 5].map((s) => (
@@ -69,7 +65,6 @@ const MovieCard = ({ item, actions, isHorizontal = false, isSearchView = false }
     );
   }
 
-  // --- شكل الكارت العادي (Grid View) ---
   const cardClass = isHorizontal ? "min-w-[300px]" : "min-w-[150px]";
   const imageClass = isHorizontal ? "h-[170px]" : "h-[225px]";
 
