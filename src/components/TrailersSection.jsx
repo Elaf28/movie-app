@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import React, { useState, useEffect, useCallback } from 'react';
 import tmdbApi from '../services/axiosConfig';
-import { FaPlay } from 'react-icons/fa';
+import { useMovieActions } from '../hooks/useMovieActions';
+import MovieCard from './MovieCard';
 
 const TrailersSection = () => {
   const [trailers, setTrailers] = useState([]);
-  const [activeTab, setActiveTab] = useState('popular');
+  const [activeTab, setActiveTab] = useState('Popular');
+  const [bgImage, setBgImage] = useState('');
+  const actions = useMovieActions();
 
-  const apiMap = {
-    popular: '/movie/popular',      
-    streaming: '/tv/on_the_air',   
-    on_tv: '/tv/popular',          
-    for_rent: '/movie/upcoming',   
-    in_theaters: '/movie/now_playing'
+  const endpoints = {
+    Popular: '/movie/popular',
+    Streaming: '/tv/on_the_air',
+    On_TV: '/tv/popular',
+    For_Rent: '/movie/upcoming',
+    In_Theaters: '/movie/now_playing'
   };
 
-  useEffect(() => {
-    const fetchTrailers = async () => {
-      try {
-        const response = await tmdbApi.get(apiMap[activeTab], {
-          params: { append_to_response: 'videos' } // بنحاول نسحب الفيديوهات مع الفيلم
-        });
-        setTrailers(response.data.results);
-      } catch (err) {
-        console.error("Error fetching trailers:", err);
-      }
-    };
-    fetchTrailers();
-  }, [activeTab]); // التحديث بيحصل هنا بس لما تدوسي على التاب
+  const fetchTrailers = useCallback(async () => {
+    try {
+      const { data } = await tmdbApi.get(endpoints[activeTab]);
+      setTrailers(data.results);
+      if (data.results[0]) setBgImage(`https://image.tmdb.org/t/p/original${data.results[0].backdrop_path}`);
+    } catch (err) { console.error(err); }
+  }, [activeTab]);
+
+  useEffect(() => { fetchTrailers(); }, [fetchTrailers]);
 
   return (
-    <section className="bg-[#032541] py-10 px-10 text-white mt-10 transition-all duration-500">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-5 mb-6">
-          <h2 className="text-2xl font-bold">Latest Trailers</h2>
-          
-          <div className="flex border-2 border-[#1ed760] rounded-full overflow-hidden bg-[#032541]">
-            {Object.keys(apiMap).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-1 text-sm font-semibold capitalize transition-all duration-300 ${
-                  activeTab === tab ? 'bg-gradient-to-r from-[#c0feff] to-[#1ed760] text-[#032541]' : 'text-white hover:text-[#1ed760]'
-                }`}
+    <section 
+      className="relative py-12 px-10 transition-all duration-700 bg-cover bg-center min-h-[380px]"
+      style={{ backgroundImage: `linear-gradient(to right, rgba(3, 37, 65, 0.9), rgba(3, 37, 65, 0.8)), url(${bgImage})` }}
+    >
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex items-center gap-5 mb-8">
+          <h2 className="text-2xl font-bold text-white">Latest Trailers</h2>
+          <div className="flex border-2 border-[#1ed5ad] rounded-full font-semibold overflow-hidden">
+            {Object.keys(endpoints).map((tab) => (
+              <button 
+                key={tab} 
+                onClick={() => setActiveTab(tab)} 
+                className={`px-4 py-1 text-xs md:text-sm transition-all ${activeTab === tab ? 'bg-[#1ed5ad] text-[#032541]' : 'text-white hover:bg-white/10'}`}
               >
                 {tab.replace('_', ' ')}
               </button>
@@ -50,30 +50,9 @@ const TrailersSection = () => {
         </div>
 
         <div className="flex gap-6 overflow-x-auto pb-6 custom-scrollbar">
-          {trailers.map((item) => (
-            <div key={item.id} className="min-w-[300px] group cursor-pointer">
-              <div className="relative h-[170px] rounded-xl overflow-hidden shadow-2xl">
-                <img 
-                  src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`} 
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-80"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-125 transition">
-                    <FaPlay className="text-3xl text-white opacity-90" />
-                  </div>
-                </div>
-                <div className="absolute top-2 right-2 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                   <span className="mb-2 font-bold">...</span>
-                </div>
-              </div>
-              
-              <div className="text-center mt-3">
-                <h3 className="font-bold text-lg group-hover:text-[#01b4e4] transition truncate">
-                  {item.title || item.name}
-                </h3>
-                <p className="text-sm text-gray-400">Official Trailer</p>
-              </div>
+          {trailers.map(item => (
+            <div key={item.id} onMouseEnter={() => setBgImage(`https://image.tmdb.org/t/p/original${item.backdrop_path}`)}>
+              <MovieCard item={item} actions={actions} isHorizontal={true} />
             </div>
           ))}
         </div>

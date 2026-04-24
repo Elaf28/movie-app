@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Watchlist from './pages/Watchlist';
 import FavoritesList from './pages/FavoritesList';
 
+import SearchPage from './components/SearchPage'
 
 const router = createBrowserRouter([
   {
@@ -44,12 +45,15 @@ const router = createBrowserRouter([
         path: 'watchlist',
         element: <Watchlist />,
       },
+         {path:"/search" ,
+   element: <SearchPage /> }
     ],
   },
   {
     path: '*',
     element: <NotFound />,
   },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
