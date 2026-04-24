@@ -7,6 +7,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import MainLayout from './layouts/MainLayout';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
+import SearchPage from './components/SearchPage'
 
 const router = createBrowserRouter([
   {
@@ -21,13 +22,16 @@ const router = createBrowserRouter([
       {
         path : 'Home',
         element : <Home />
-      }
+      },
+         {path:"/search" ,
+   element: <SearchPage /> }
     ],
   },
   {
     path: '*',
     element: <NotFound />,
   },
+
 ]);
 
 createRoot(document.getElementById('root')).render(
