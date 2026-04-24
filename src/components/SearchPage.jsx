@@ -9,7 +9,6 @@ function SearchPage() {
   const actions = useMovieActions();
   const location = useLocation();
 
-  // استخراج كلمة البحث من اللينك
   const query = new URLSearchParams(location.search).get('query');
 
   useEffect(() => {
@@ -23,7 +22,6 @@ function SearchPage() {
   return (
     <div className="max-w-[1300px] mx-auto px-6 py-10 mt-16 flex flex-col md:flex-row gap-8">
       
-      {/* الجزء اللي على الشمال (زي صورة TMDB) */}
       <div className="w-full md:w-[260px] flex-shrink-0">
         <div className="bg-[#01b4e4] text-white p-4 rounded-t-xl font-bold">Search Results</div>
         <div className="border border-gray-200 rounded-b-xl p-4 space-y-4 shadow-sm">
@@ -38,7 +36,6 @@ function SearchPage() {
         </div>
       </div>
 
-      {/* الجزء اللي على اليمين (نتايج البحث العريضة) */}
       <div className="flex-grow flex flex-col gap-4">
         {results.map(movie => (
           movie.poster_path && (
@@ -46,7 +43,7 @@ function SearchPage() {
               key={movie.id} 
               item={movie} 
               actions={actions} 
-              isSearchView={true} // عشان يتفعل الشكل العريض اللي عملناه
+              isSearchView={true};     
             />
           )
         ))}
