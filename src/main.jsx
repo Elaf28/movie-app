@@ -10,6 +10,9 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
+import Watchlist from './pages/Watchlist';
+import FavoritesList from './pages/FavoritesList';
+
 
 const router = createBrowserRouter([
   {
@@ -32,7 +35,15 @@ const router = createBrowserRouter([
       {
         path : 'Home',
         element : <Home />
-      }
+      },
+      {
+        path: 'favorites',
+        element: <FavoritesList />,
+      },
+      {
+        path: 'watchlist',
+        element: <Watchlist />,
+      },
     ],
   },
   {
