@@ -12,8 +12,7 @@ import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import Watchlist from './pages/Watchlist';
 import FavoritesList from './pages/FavoritesList';
-
-import SearchPage from './components/SearchPage'
+import SearchPage from './pages/SearchPages'
 
 const router = createBrowserRouter([
   {
