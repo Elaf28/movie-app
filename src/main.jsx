@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
+import DiscoverMovies from './pages/DiscoverMovies';
 
 const router = createBrowserRouter([
   {
@@ -23,16 +24,25 @@ const router = createBrowserRouter([
       },
       {
         path: 'register',
-        element: <Register/>,
+        element: <Register />,
       },
       {
         path: 'login',
-        element: <Login/>,
+        element: <Login />,
       },
       {
-        path : 'Home',
-        element : <Home />
-      }
+        path: 'Home',
+        element: <Home />,
+      },
+      {
+        path: 'movie',
+        children: [
+          {
+            path: 'discover',
+            element: <DiscoverMovies />,
+          },
+        ],
+      },
     ],
   },
   {
