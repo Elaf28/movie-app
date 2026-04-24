@@ -6,7 +6,6 @@ const Hero = ({ searchTerm, setSearchTerm }) => {
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      // بينقلك لصفحة البحث الجديدة مع تمرير كلمة البحث في الرابط
       navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
     }
   };
@@ -14,14 +13,12 @@ const Hero = ({ searchTerm, setSearchTerm }) => {
   return (
     <section className="relative h-[300px] md:h-[360px] w-full flex flex-col justify-center px-6 md:px-10 text-white overflow-hidden">
       
-      {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0 w-full h-full">
         <img 
           src="/img3.jpg" 
           alt="Background" 
           className="w-full h-full object-cover" 
         />
-        {/* طبقة شفافة زرقاء غامقة عشان الكلام يوضح */}
         <div className="absolute inset-0 bg-[#032541]/60"></div>
       </div>
 
