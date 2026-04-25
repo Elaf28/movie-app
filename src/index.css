@@ -72,7 +72,7 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.62 0.17 185); /* teal — slightly muted for light bg */
+  --primary: oklch(0.78 0.14 180); /* teal — slightly muted for light bg */
   --primary-foreground: oklch(0.1 0 0); /* near-black text on teal */
   --secondary: oklch(0.93 0 0);
   --secondary-foreground: oklch(0.2 0 0);
@@ -102,7 +102,7 @@
 
 .dark {
   /* Dark mode: the actual Moviebes palette from the designs */
-  --background: oklch(0.18 0 0); /* #1c1c1c — main page background */
+  --background: oklch(0.15 0 0); /* #1c1c1c — main page background */
   --foreground: oklch(0.97 0 0); /* near-white text */
   --card: oklch(0.22 0 0); /* #252525 — card surfaces */
   --card-foreground: oklch(0.97 0 0);
