@@ -1,9 +1,15 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import React from 'react';
+import { useMovieStore } from '@/Store/zustand/useMovieStore';
+import React, { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router';
 
 const MainLayout = () => {
+  const sync = useMovieStore((state) => state.syncWithUser);
+  useEffect(() => {
+    sync();
+  }, [sync]);
   return (
     <>
       <div className="min-h-screen flex flex-col">
@@ -11,7 +17,8 @@ const MainLayout = () => {
         <main>
           <Outlet />
         </main>
-        {/* <Footer /> */}
+        <Footer />
+        <Toaster position="top-right" />
       </div>
     </>
   );

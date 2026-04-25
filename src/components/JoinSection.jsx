@@ -2,7 +2,7 @@ import React from 'react';
 
 const JoinSection = () => {
   return (
-    <section className="relative bg-[#240046] py-16 px-10 text-white overflow-hidden mx-3">
+    <section className="relative bg-[#240046] py-16 mb-10 px-10 text-white overflow-hidden mx-3">
       
       <div className="absolute inset-0 z-0">
        <img 
