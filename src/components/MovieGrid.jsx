@@ -5,7 +5,10 @@ import MovieCardSkeleton from './MovieCardSkeleton';
 function MovieGrid({ movies, isLoading }) {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-5 mt-8">
+      <div
+        className="grid gap-5 mt-8"
+        style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))' }}
+      >
         {[...Array(20)].map((_, i) => (
           <MovieCardSkeleton key={i} />
         ))}
@@ -14,9 +17,12 @@ function MovieGrid({ movies, isLoading }) {
   }
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-5 mt-8">
+    <div
+      className="grid gap-5 mt-8"
+      style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))' }}
+    >
       {movies.map((movie) => (
-        <MovieCard movie={movie} />
+        <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
   );
