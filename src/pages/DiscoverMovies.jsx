@@ -51,8 +51,7 @@ function DiscoverMovies() {
   const displayTitle = activeGenreLabel || 'Discover Movies';
 
   return (
-    <div className="px-12 py-8">
-      {console.log(movies)}
+    <Container className="py-3 md:py-6 lg:py-10">
       <div className="flex justify-between items-center">
         <h1 className="font-semibold text-3xl">{displayTitle}</h1>
         <SortSelect />

@@ -4,7 +4,7 @@ function GenreCard({ genre, posterUrl, onClick, isSelected }) {
   return (
     <div
       onClick={onClick}
-      className={`group relative flex min-w-[260px] snap-start items-center overflow-hidden rounded-lg  px-5 transition hover:bg-primary/70 cursor-pointer ${!isSelected ? 'bg-card' : 'bg-primary/70'}`}
+      className={`group relative flex min-w-[260px] snap-start items-center overflow-hidden rounded-lg  px-5 transition hover:bg-primary cursor-pointer ${!isSelected ? 'bg-card' : 'bg-primary'}`}
     >
       <div className="flex-1 py-3">
         <div

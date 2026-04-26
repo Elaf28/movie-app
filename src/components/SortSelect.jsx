@@ -32,10 +32,10 @@ function SortSelect() {
         {sortGroups.map((group, i) => (
           <SelectGroup key={i}>
             <SelectLabel>{group.name}</SelectLabel>
-            <SelectItem value={group.options[0].value}>
+            <SelectItem value={group.options[0].value} className='cursor-pointer'>
               {group.options[0].label}
             </SelectItem>
-            <SelectItem value={group.options[1].value}>
+            <SelectItem value={group.options[1].value} className='cursor-pointer'>
               {group.options[1].label}
             </SelectItem>
           </SelectGroup>

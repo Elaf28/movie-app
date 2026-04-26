@@ -29,7 +29,7 @@ useEffect(() => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex gap-6 font-semibold">
-          <Link to="/movies" className="hover:text-[#01b4e4] transition-colors">Movies</Link>
+          <Link to="/movie/discover" className="hover:text-[#01b4e4] transition-colors">Discover</Link>
           <Link to="/tv" className="hover:text-[#01b4e4] transition-colors">TV Shows</Link>
           <Link to="/people" className="hover:text-[#01b4e4] transition-colors">People</Link>
           <Link to="/more" className="hover:text-[#01b4e4] transition-colors">More</Link>

@@ -4,9 +4,11 @@ import { useSearchParams } from 'react-router';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import GenreCard from './GenreCard';
 import genre_metadata from '@/constants/genres';
+import GenreCardSkeleton from './GenreCardSkeleton';
 
 function GenreList() {
   const [genres, setGenres] = useState([]);
+  const [isGenresLoading, setIsGenresLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeGenreId = searchParams.get('genre');
   const scrollRef = useRef(null);
@@ -16,8 +18,16 @@ function GenreList() {
 
   useEffect(() => {
     (async () => {
-      const res = await tmdbApi.get('/genre/movie/list');
-      setGenres(res.data.genres);
+      try {
+        setIsGenresLoading(true);
+
+        const res = await tmdbApi.get('/genre/movie/list');
+        setGenres(res.data.genres);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsGenresLoading(false);
+      }
     })();
   }, []);
 
@@ -52,6 +62,16 @@ function GenreList() {
     setSearchParams(params);
   };
 
+  if (isGenresLoading) {
+    return (
+      <div className="w-full flex gap-4 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory pb-4 mt-6">
+        {[...Array(6)].map((_, i) => (
+          <GenreCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="group/list relative w-full mt-6">
       {canScrollLeft && (
@@ -85,7 +105,6 @@ function GenreList() {
         })}
       </div>
 
-      {/* Right Arrow - Hidden if canScrollRight is false */}
       {canScrollRight && (
         <button
           onClick={() => scroll('right')}

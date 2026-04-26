@@ -38,11 +38,11 @@ const MovieCard = (props) => {
 
   return (
     <div 
-      className={`group relative flex flex-col shrink-0 transition-all duration-300 ${isHorizontal ? "w-[300px]" : "w-[160px] md:w-[200px]"}`}
+      className={`cursor-pointer group relative flex flex-col shrink-0 transition-all duration-300 ${isHorizontal ? "w-[300px]" : "w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px]"}`}
       onMouseLeave={() => setIsRateOpen(false)}
     >
       {/* الحاوية الأساسية مع ألوان Palette Moviebes الجديدة */}
-      <div className={`relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-[var(--card)] border border-gray-100 dark:border-[var(--border)] ${isHorizontal ? "h-[170px]" : "h-[240px] md:h-[300px]"}`}>
+      <div className={`relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-[var(--card)] border border-gray-100 dark:border-[var(--border)] ${isHorizontal ? "h-[170px]" : "h-[180px] sm:h-[210px] md:h-[240px] lg:h-[270px]"}`}>
         
         <img 
           src={posterUrl} 
@@ -59,7 +59,7 @@ const MovieCard = (props) => {
             {/* زر المفضل (Favorite) */}
             <button 
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(movie); }} 
-              className={`p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${isFavorite ? 'bg-red-600 text-white' : 'bg-black/60 text-white hover:bg-red-600'}`}
+              className={`cursor-pointer p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${isFavorite ? 'bg-red-600 text-white' : 'bg-black/60 text-white hover:bg-red-600'}`}
             >
               <Heart size={20} fill={isFavorite ? "white" : "none"} />
             </button>
@@ -67,7 +67,7 @@ const MovieCard = (props) => {
             {/* زر قائمة المشاهدة (Watchlist) */}
             <button 
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWatchlist(movie); }} 
-              className={`p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${isInWatchlist ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'bg-black/60 text-white hover:bg-[var(--primary)]'}`}
+              className={`cursor-pointer p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${isInWatchlist ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'bg-black/60 text-white hover:bg-[var(--primary)]'}`}
             >
               <Bookmark size={20} fill={isInWatchlist ? "currentColor" : "none"} />
             </button>
@@ -76,7 +76,7 @@ const MovieCard = (props) => {
             <div className="relative">
               <button 
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsRateOpen(!isRateOpen); }} 
-                className={`p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${userRating > 0 || isRateOpen ? 'bg-yellow-500 text-white' : 'bg-black/60 text-white hover:bg-yellow-500'}`}
+                className={`cursor-pointer p-3 rounded-full backdrop-blur-md border border-white/20 transition-all hover:scale-110 ${userRating > 0 || isRateOpen ? 'bg-yellow-500 text-white' : 'bg-black/60 text-white hover:bg-yellow-500'}`}
               >
                 <Star size={20} fill={userRating > 0 ? "white" : "none"} />
               </button>

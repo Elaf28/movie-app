@@ -26,22 +26,22 @@ function AppPagination({ page, totalPages, onPageChange }) {
   const pageNumbers = getPageNumbers();
 
   return (
-    <Pagination>
-      <PaginationContent>
+    <Pagination className="mt-12 mb-8">
+      <PaginationContent className="bg-card rounded-xl px-2 py-1 gap-4">
         <PaginationItem>
           <PaginationPrevious
             onClick={() => onPageChange(page - 1)}
-            className={
-              page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'
-            }
+            className={`text-base ${page === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
           />
         </PaginationItem>
 
         <PaginationItem>
           <PaginationLink
+            // className={`cursor-pointer h-10 w-10 text-base ${page === 1 ? 'bg-primary text-primary-foreground' : ''}`}
+            className="cursor-pointer h-10 w-10 text-base"
             onClick={() => onPageChange(1)}
             isActive={page === 1}
-            className="cursor-pointer"
+            // className="cursor-pointer"
           >
             1
           </PaginationLink>
@@ -54,7 +54,7 @@ function AppPagination({ page, totalPages, onPageChange }) {
             <PaginationLink
               onClick={() => onPageChange(num)}
               isActive={page === num}
-              className="cursor-pointer"
+              className="cursor-pointer h-10 w-10 text-base"
             >
               {num}
             </PaginationLink>
@@ -68,7 +68,7 @@ function AppPagination({ page, totalPages, onPageChange }) {
             <PaginationLink
               onClick={() => onPageChange(actualTotalPages)}
               isActive={page === actualTotalPages}
-              className="cursor-pointer"
+              className="cursor-pointer h-10 w-10 text-base"
             >
               {actualTotalPages}
             </PaginationLink>
@@ -78,11 +78,7 @@ function AppPagination({ page, totalPages, onPageChange }) {
         <PaginationItem>
           <PaginationNext
             onClick={() => onPageChange(page + 1)}
-            className={
-              page === actualTotalPages
-                ? 'pointer-events-none opacity-50'
-                : 'cursor-pointer'
-            }
+            className={`text-base ${page === actualTotalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
           />
         </PaginationItem>
       </PaginationContent>
