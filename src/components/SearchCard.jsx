@@ -35,14 +35,12 @@ const SearchCard = ({ item }) => {
           </div>
           
           <div className="flex gap-1 shrink-0">
-            {/* زر المفضل: بينادي على toggleFavorite اللي جوه الـ Store */}
             <ActionButton 
               active={isFavorite} 
               onClick={() => toggleFavorite(item)} 
               Icon={Heart} 
               activeColor="text-red-500" 
             />
-            {/* زر قائمة المشاهدة: بينادي على toggleWatchlist اللي جوه الـ Store */}
             <ActionButton 
               active={isInWatchlist} 
               onClick={() => toggleWatchlist(item)} 
