@@ -72,7 +72,7 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.62 0.17 185); /* teal — slightly muted for light bg */
+  --primary: oklch(0.78 0.14 180); /* teal — slightly muted for light bg */
   --primary-foreground: oklch(0.1 0 0); /* near-black text on teal */
   --secondary: oklch(0.93 0 0);
   --secondary-foreground: oklch(0.2 0 0);
@@ -102,13 +102,13 @@
 
 .dark {
   /* Dark mode: the actual Moviebes palette from the designs */
-  --background: oklch(0.18 0 0); /* #1c1c1c — main page background */
+  --background: oklch(0.15 0 0); /* #1c1c1c — main page background */
   --foreground: oklch(0.97 0 0); /* near-white text */
   --card: oklch(0.22 0 0); /* #252525 — card surfaces */
   --card-foreground: oklch(0.97 0 0);
   --popover: oklch(0.22 0 0);
   --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.82 0.15 180); /* teal #2dd4bf */
+  --primary: oklch(0.82 0.15 180 / 0.7); /* teal #2dd4bf */
   --primary-foreground: oklch(0.12 0 0); /* dark text on teal buttons */
   --secondary: oklch(0.28 0 0); /* #2d2d2d — secondary surfaces */
   --secondary-foreground: oklch(0.97 0 0);
@@ -121,7 +121,7 @@
   --input: oklch(0.26 0 0);
   --ring: oklch(0.82 0.15 180);
   --chart-1: oklch(0.82 0.15 180);
-  --chart-2: oklch(0.68 0.12 180);
+  --chart-2: oklch(68.007% 0.12009 179.996);
   --chart-3: oklch(0.55 0.1 180);
   --chart-4: oklch(0.4 0.08 180);
   --chart-5: oklch(0.28 0.05 180);
