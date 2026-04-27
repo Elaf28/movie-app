@@ -8,6 +8,7 @@ import MovieCredits from "@/components/MovieCredits";
 import { useMovieDetails } from "@/hooks/useMovieDetails";
 import { Container } from "@/components/Container";
 import MovieDetailsSkeleton from "@/components/MovieDetailsSkeleton";
+import SimilarMovies from "@/components/SimilarMovies";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -63,6 +64,7 @@ function MovieDetails() {
               <h2 className="text-xl font-medium sm:text-2xl">
                 Similar Movies
               </h2>
+              <SimilarMovies movieId={id} />
             </div>
           </div>
         </div>
