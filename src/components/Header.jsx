@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom'; // لازم تثبتي react-router-dom
 import { HiSun, HiMoon } from 'react-icons/hi'; // مكتبة react-icons
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
+const [darkMode, setDarkMode] = useState(
+  localStorage.getItem('theme') === 'dark' // بيقرأ الحالة القديمة
+);
 
-  // منطق تغيير الثيم
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
+useEffect(() => {
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark'); // بيسيف الحالة
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+}, [darkMode]);
 
   return (
     <nav className="bg-[#032541] dark:bg-[#011526] text-white p-4 flex justify-between items-center sticky top-0 z-50 transition-colors duration-300">
@@ -24,7 +27,7 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex gap-6 font-semibold">
-          <Link to="/movies" className="hover:text-[#01b4e4] transition-colors">Movies</Link>
+          <Link to="/movie/discover" className="hover:text-[#01b4e4] transition-colors">Discover</Link>
           <Link to="/tv" className="hover:text-[#01b4e4] transition-colors">TV Shows</Link>
           <Link to="/people" className="hover:text-[#01b4e4] transition-colors">People</Link>
           <Link to="/more" className="hover:text-[#01b4e4] transition-colors">More</Link>

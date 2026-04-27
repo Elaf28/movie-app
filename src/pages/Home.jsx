@@ -1,11 +1,15 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+/* eslint-disable no-unused-vars */
+>>>>>>> main
 import React, { useState } from 'react';
 =======
 /* eslint-disable no-unused-vars */
 import React, { useState, useMemo } from 'react';
 >>>>>>> Stashed changes
 import tmdbApi from '../services/axiosConfig';
-import { useMovieActions } from '../hooks/useMovieActions';
+import { useMovieStore } from '@/Store/zustand/useMovieStore'; 
 import Hero from '../components/Hero';
 import TrailersSection from '../components/TrailersSection';
 import MovieSection from '../components/MovieSection';
@@ -17,6 +21,7 @@ function Home() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   const actions = useMovieActions();
 =======
@@ -24,6 +29,10 @@ function Home() {
   
   const { syncWithUser } = useMovieStore();
 >>>>>>> Stashed changes
+=======
+  
+  const { syncWithUser } = useMovieStore();
+>>>>>>> main
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) { 
@@ -58,41 +67,44 @@ function Home() {
   }), []);
 
   return (
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <div className="min-h-screen bg-white">
+=======
+   
+    <div className="min-h-screen bg-white dark:bg-[var(--background)] text-black dark:text-[var(--foreground)] transition-colors duration-300">
+>>>>>>> main
       <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handleSearch} />
       
       <main className="space-y-2">
-      {isSearching ? (
-  <section className="max-w-5xl mx-auto px-6 py-12">
-    <h2 className="text-2xl font-bold text-[#032541] mb-8 border-l-4 border-[#01b4e4] pl-4">Search Results</h2>
-    
-    {/* غيرنا الـ grid ليكون عمود واحد فقط عشان الكروت هتبقى عريضة */}
-    <div className="flex flex-col gap-4">
-      {searchResults.map(movie => (
-        movie.poster_path && (
-          <MovieCard 
-            key={movie.id} 
-            item={movie} 
-            actions={actions} 
-            isSearchView={true} // أهم سطر عشان يفعل التصميم الجديد
-          />
-        )
-      ))}
-    </div>
+        {isSearching ? (
+          <section className="max-w-5xl mx-auto px-6 py-12">
+            
+            <h2 className="text-2xl font-bold text-[#032541] dark:text-[var(--chart-2)] mb-8 border-l-4 border-[#01b4e4] dark:border-[var(--primary)] pl-4 transition-colors">
+              Search Results
+            </h2>
+            
+            <div className="flex flex-col gap-4">
+              {searchResults.map(movie => (
+                movie.poster_path && (
+                  <MovieCard 
+                    key={movie.id} 
+                    item={movie} 
+                    isSearchView={true} 
+                  />
+                )
+              ))}
+            </div>
           </section>
         ) : (
-          <>
-            {/* Trending */}
+          <div className="flex flex-col gap-8 pb-10">
             <MovieSection 
               title="Trending" 
               endpoints={{ Today: '/trending/all/day', This_Week: '/trending/all/week' }} 
             />
             
-            {/* Trailers (Section with 5 tabs as requested) */}
             <TrailersSection /> 
 
-            {/* Popular */}
             <MovieSection 
               title="What's Popular" 
               endpoints={{ 
@@ -103,7 +115,6 @@ function Home() {
               }} 
             />
 
-            {/* Free To Watch */}
             <MovieSection 
               title="Free To Watch" 
               endpoints={{ 
@@ -145,7 +156,7 @@ function Home() {
             <MovieSection title="Free To Watch" endpoints={freeEndpoints} />
 >>>>>>> Stashed changes
             <JoinSection />
-          </>
+          </div>
         )}
       </main>
     </div>
