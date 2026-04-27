@@ -13,15 +13,23 @@ import { Play } from "lucide-react";
 import "@vidstack/react/player/styles/base.css";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
+import { useMovieVideos } from "@/hooks/useMovieVideos";
+import MovieTrailerPlayerSkeleton from "./MovieTrailerPlayerSkeleton";
 
-export default function MovieTrailerPlayer({ trailerYoutubeKey, title }) {
-  const thumbnail = `https://img.youtube.com/vi/${trailerYoutubeKey}/maxresdefault.jpg`;
+export default function MovieTrailerPlayer({ movieId }) {
+  const { trailer, isLoading } = useMovieVideos(movieId);
+
+  if (isLoading) {
+    return <MovieTrailerPlayerSkeleton />;
+  }
+
+  const thumbnail = `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`;
 
   return (
     <div className="flex max-h-60 justify-center overflow-hidden rounded-3xl md:max-h-96">
       <MediaPlayer
-        title={title}
-        src={`youtube/${trailerYoutubeKey}`}
+        title={trailer.name}
+        src={`youtube/${trailer.key}`}
         playsInline
         load="visible"
         className="relative aspect-video w-full bg-black"
@@ -29,7 +37,7 @@ export default function MovieTrailerPlayer({ trailerYoutubeKey, title }) {
         <MediaProvider>
           <Poster
             src={thumbnail}
-            alt={title}
+            alt={trailer.name}
             className="vds-poster absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
           />
         </MediaProvider>

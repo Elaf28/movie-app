@@ -1,7 +1,9 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 
-function MovieCrew({ director, writers, stars }) {
+function MovieCrew({ crew }) {
+  const { director, writers, stars } = crew;
+
   return (
     <div className="mt-6 space-y-4">
       <Separator />

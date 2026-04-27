@@ -2,8 +2,13 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import MovieEngagement from "@/components/MovieEngagement";
 import { formatRuntime } from "@/utils/movieHelpers";
+import MovieHeaderSkeleton from "./MovieHeaderSkeleton";
 
-function MovieHeader({ movie }) {
+function MovieHeader({ movie, isLoading }) {
+  if (isLoading) {
+    return <MovieHeaderSkeleton />;
+  }
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg font-semibold lg:mt-4">
