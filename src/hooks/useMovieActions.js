@@ -6,6 +6,21 @@ export const useMovieActions = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [userRatings, setUserRatings] = useState({});
 
+<<<<<<< Updated upstream
+=======
+  const getCurrentUser = () => JSON.parse(localStorage.getItem('user'));
+
+  const getKeysForUser = (user) => {
+    const userId = user ? user.username : 'guest';
+    return {
+      favKey: `favorites_${userId}`,
+      watchKey: `watchlist_${userId}`,
+      ratingKey: `userRatings_${userId}`,
+      userId
+    };
+  };
+
+>>>>>>> Stashed changes
   useEffect(() => {
     const loadData = (key) => JSON.parse(localStorage.getItem(key)) || [];
     setFavorites(loadData('favorites'));

@@ -17,14 +17,12 @@ const Navbar = () => {
   return (
     <nav className="bg-[#032541] dark:bg-[#011526] text-white p-4 flex justify-between items-center sticky top-0 z-50 transition-colors duration-300">
       <div className="flex items-center gap-8">
-        {/* Logo - بيودي للصفحة الرئيسية */}
         <Link to="/Home">
           <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#90cea1] to-[#01b4e4] cursor-pointer">
             T&M
           </h1>
         </Link>
 
-        {/* Navigation Links */}
         <div className="hidden md:flex gap-6 font-semibold">
           <Link to="/movies" className="hover:text-[#01b4e4] transition-colors">Movies</Link>
           <Link to="/tv" className="hover:text-[#01b4e4] transition-colors">TV Shows</Link>
@@ -34,7 +32,6 @@ const Navbar = () => {
       </div>
       
       <div className="flex items-center gap-6">
-        {/* Theme Toggle Icon */}
         <button 
           onClick={() => setDarkMode(!darkMode)}
           className="text-2xl hover:text-[#90cea1] transition-all transform hover:scale-110"

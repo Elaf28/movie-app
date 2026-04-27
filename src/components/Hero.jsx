@@ -19,7 +19,12 @@ const Hero = ({ searchTerm, setSearchTerm }) => {
           alt="Background" 
           className="w-full h-full object-cover" 
         />
+<<<<<<< Updated upstream
         <div className="absolute inset-0 bg-[#032541]/60"></div>
+=======
+        
+        <div className="absolute inset-0 bg-[#032541]/60 dark:bg-black/80 transition-colors duration-500"></div>
+>>>>>>> Stashed changes
       </div>
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -30,12 +35,15 @@ const Hero = ({ searchTerm, setSearchTerm }) => {
           </h3>
         </div>
 
-        {/* Search Bar Container */}
         <div className="relative mt-8 max-w-[1200px]">
           <input 
             type="text" 
             placeholder="Search for a movie, tv show, person......"
+<<<<<<< Updated upstream
             className="w-full h-[46px] rounded-full px-6 text-[1.1rem] text-white outline focus:ring-2 focus:ring-[#01b4e4]"
+=======
+            className="w-full h-[46px] rounded-full px-6 text-[1.1rem] outline-none text-black dark:text-white bg-white dark:bg-slate-800/90 border-none focus:ring-2 focus:ring-[#01b4e4] transition-all"
+>>>>>>> Stashed changes
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
