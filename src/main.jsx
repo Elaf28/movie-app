@@ -1,13 +1,20 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
+// import './App.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import MainLayout from './layouts/MainLayout';
+import Register from './pages/Register';
+import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
-import SearchPage from './components/SearchPage'
+import Watchlist from './pages/Watchlist';
+import FavoritesList from './pages/FavoritesList';
+import SearchPage from './pages/SearchPages';
+import Profile from './pages/Profile';
+import DiscoverMovies from './pages/DiscoverMovies';
 
 const router = createBrowserRouter([
   {
@@ -20,18 +27,48 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path : 'Home',
-        element : <Home />
+        path: 'register',
+        element: <Register />,
       },
-         {path:"/search" ,
-   element: <SearchPage /> }
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'movie',
+        children: [
+          {
+            path: 'discover',
+            element: <DiscoverMovies />,
+          },
+        ],
+      },
+      {
+        path: 'favorites',
+        element: <FavoritesList />,
+      },
+      {
+        path: 'watchlist',
+        element: <Watchlist />,
+      },
+      {
+        path: '/search',
+        element: <SearchPage />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
+      },
     ],
   },
   {
     path: '*',
     element: <NotFound />,
   },
-
 ]);
 
 createRoot(document.getElementById('root')).render(
