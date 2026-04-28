@@ -7,7 +7,7 @@ import { useMovieStore } from '@/Store/zustand/useMovieStore';
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem('theme') === 'dark'
+    localStorage.getItem('theme') !== 'light'
   );
 
   const { user, logout } = useAuthStore();
