@@ -26,7 +26,9 @@ const Navbar = () => {
   }, [darkMode]);
 
   return (
-    <nav className="bg-background text-foreground border-b border-border shadow-md dark:shadow-[0_4px_20px_rgba(100,100,100,0.5)] px-6 py-4 sticky top-0 z-50">
+    // <nav className="bg-background text-foreground border-b border-border shadow-md dark:shadow-[0_4px_20px_rgba(100,100,100,0.5)] px-6 py-4 sticky top-0 z-50">
+    // <nav className="bg-card/70 backdrop-blur-3xl text-foreground px-6 py-4 fixed top-4 left-50 z-50 w-[1300px] mx-auto rounded-3xl">
+    <nav className="bg-card/70 backdrop-blur-3xl text-foreground px-6 py-4 fixed top-4 z-50 w-[1300px] max-w-[95vw] left-1/2 -translate-x-1/2 rounded-3xl">
       <div className='flex justify-between items-center'>
         <div className="flex items-center gap-8">
           <Link to="/Home">

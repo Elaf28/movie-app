@@ -90,7 +90,7 @@ function Home() {
   const freeEndpoints = useMemo(() => ({ Movies: '/discover/movie?sort_by=vote_count.desc', TV: '/discover/tv?sort_by=vote_count.desc' }), []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--background)] to-[var(--card)] text-[var(--foreground)] transition-colors duration-500">
+    <div className="min-h-screen  from-[var(--background)] to-[var(--card)] text-[var(--foreground)] transition-colors duration-500">
       
       <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handleHeroSearch} />
 
@@ -155,11 +155,11 @@ function Home() {
       )}
       
       <main className="space-y-4 pt-10">
-        <div className="flex flex-col gap-16 pb-20">
+        <div className="flex flex-col gap-8 pb-20">
           
           <MovieSection title="Trending" endpoints={trendingEndpoints} />
           
-          <div className="py-4 bg-[var(--secondary)]/20 backdrop-blur-sm border-y border-[var(--border)] shadow-inner">
+          <div className="bg-[var(--secondary)]/20 backdrop-blur-sm shadow-inner">
               <TrailersSection /> 
           </div>
 

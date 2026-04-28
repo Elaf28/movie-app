@@ -51,9 +51,9 @@ function SearchPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[var(--background)] transition-colors duration-300">
+    <div className="min-h-screen transition-colors duration-300">
       
-      <div className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[var(--background)]/90 backdrop-blur-md border-b border-zinc-200 dark:border-[var(--border)] py-4">
+      <div className="sticky top-0 w-full bg-white/90 dark:bg-[var(--background)]/90 backdrop-blur-md py-4">
         <div className="max-w-7xl mx-auto px-6">
           <form onSubmit={handleSearchSubmit} className="relative group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-[var(--primary)]" size={18} />

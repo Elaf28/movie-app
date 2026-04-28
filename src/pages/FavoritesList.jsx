@@ -10,7 +10,7 @@ const FavoritesList = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen px-6 py-10 max-w-7xl mx-auto">
+    <div className="min-h-screen px-6 pt-30 pb-8 max-w-7xl mx-auto">
 
       {/* Header */}
       <div className="mb-8">

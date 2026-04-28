@@ -10,7 +10,7 @@ const Watchlist = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen px-6 py-10 max-w-7xl mx-auto">
+        <div className="min-h-screen px-6 pt-30 pb-10 max-w-7xl mx-auto">
 
         <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground">My Watchlist</h1>

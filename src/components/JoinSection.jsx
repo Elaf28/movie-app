@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const JoinSection = () => {
   return (
@@ -28,9 +29,12 @@ const JoinSection = () => {
             </span>
             .
           </p>
-          <button className="bg-[var(--primary)] text-[var(--primary-foreground)] px-10 py-3 rounded-md font-bold hover:brightness-110 transition-all duration-300 shadow-lg">
+          <Link 
+            to="/register"
+            className="bg-[var(--primary)] text-[var(--primary-foreground)] px-10 py-3 rounded-md font-bold hover:brightness-110 transition-all duration-300 shadow-lg cursor-pointer inline-block"
+          >
             Sign Up
-          </button>
+          </Link>
         </div>
 
         <div className="md:w-2/5 text-sm opacity-80 space-y-4">

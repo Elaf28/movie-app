@@ -4,6 +4,8 @@ import tmdbApi from '../services/axiosConfig';
 import { useMovieActions } from '../hooks/useMovieActions';
 import MovieCard from './MovieCard';
 import MovieCardSkeleton from './MovieCardSkeleton';  
+import ScrollableRow from './ScrollableRow';
+import { Container } from './Container';
 
 const MovieSection = ({ title, endpoints }) => {
   const [data, setData] = useState([]);
@@ -33,15 +35,16 @@ const MovieSection = ({ title, endpoints }) => {
   }, [fetchData]);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-8">
-      <div className="flex items-center gap-5 mb-6">
+    <Container>
+    {/* <section className="max-w-7xl mx-auto px-6 py-8"> */}
+      <div className="flex items-center gap-5">
         <h2 className="text-2xl font-bold text-[var(--foreground)]">{title}</h2>
         <div className="flex border-2 border-[var(--primary)] rounded-full font-semibold overflow-hidden shadow-sm">
           {Object.keys(endpoints).map((tab) => (
             <button 
-              key={tab} 
-              onClick={() => setActiveTab(tab)} 
-              className={`px-5 py-1 capitalize transition-all text-sm ${activeTab === tab ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'bg-transparent text-[var(--foreground)] hover:bg-[var(--muted)]'}`}
+            key={tab} 
+            onClick={() => setActiveTab(tab)} 
+            className={`px-5 py-1 capitalize transition-all text-sm ${activeTab === tab ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'bg-transparent text-[var(--foreground)] hover:bg-[var(--muted)]'}`}
             >
               {tab.replace(/_/g, ' ')}
             </button>
@@ -49,7 +52,8 @@ const MovieSection = ({ title, endpoints }) => {
         </div>
       </div>
 
-      <div className="flex gap-6 overflow-x-auto pb-5 custom-scrollbar">
+      {/* <div className="flex gap-6 overflow-x-auto pb-5 custom-scrollbar"> */}
+      <ScrollableRow className="py-7 whitespace-nowrap">
         {loading ? (
           [...Array(8)].map((_, i) => <MovieCardSkeleton key={i} />)
         ) : (
@@ -57,8 +61,10 @@ const MovieSection = ({ title, endpoints }) => {
             <MovieCard key={item.id} item={item} actions={actions} />
           ))
         )}
-      </div>
-    </section>
+      </ScrollableRow>
+      {/* </div> */}
+    {/* </section> */}
+    </Container>
   );
 };
 

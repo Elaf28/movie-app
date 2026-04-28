@@ -18,7 +18,7 @@ const Profile = () => {
     const initials = user?.name?.charAt(0)?.toUpperCase()
 
     return (
-    <div className='min-h-screen px-4 py-10 max-w-7xl mx-auto'>
+    <div className='min-h-screen px-4 pt-30 pb-12 max-w-7xl mx-auto'>
         <div className=' mb-8 flex items-center gap-6'>
             <Avatar className="w-24 h-24">
                 <AvatarFallback className='text-3xl bg-primary text-primary-foreground'>
