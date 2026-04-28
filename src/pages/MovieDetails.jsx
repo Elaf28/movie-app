@@ -19,6 +19,8 @@ function MovieDetails() {
     return <MovieDetailsSkeleton />;
   }
 
+  const FALLBACK_POSTER = "https://placehold.co/600x900/1c1c1c/2dd4bf?text=CineVerse";
+
   return (
     <>
       <Container className="pt-26 pb-8">
@@ -29,11 +31,18 @@ function MovieDetails() {
         <div className="relative mt-6 grid grid-cols-1 gap-4 lg:mt-4 lg:grid-cols-[300px_1fr] lg:gap-8">
           <div className="flex flex-row-reverse justify-between gap-4 lg:relative lg:block">
             <div className="w-[150px] lg:sticky lg:top-24 lg:w-full">
-              <div className="overflow-hidden rounded-2xl">
+              <div className="bg-muted/20 aspect-[2/3] overflow-hidden rounded-2xl">
                 <img
-                  src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                  alt="Movie Poster"
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                      : FALLBACK_POSTER
+                  }
+                  alt={movie.title || "Movie Poster"}
                   className="mx-auto h-full w-full max-w-[300px] object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = FALLBACK_POSTER;
+                  }}
                 />
               </div>
             </div>

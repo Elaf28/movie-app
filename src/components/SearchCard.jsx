@@ -17,15 +17,24 @@ const SearchCard = ({ item }) => {
     navigate(`/movie/${item.id}`);
   };
 
+  const FALLBACK_POSTER = "https://placehold.co/600x900/1c1c1c/2dd4bf?text=CineVerse";
+
+  const posterUrl = item.poster_path 
+    ? `https://image.tmdb.org/t/p/w500${item.poster_path}` 
+    : FALLBACK_POSTER;
+
   return (
     <div className="flex w-full bg-white dark:bg-[var(--card)] border border-gray-200 dark:border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-[160px] md:h-[200px] mb-6 cursor-pointer hover:ring-2 hover:ring-primary" onClick={handleCardClick} role='link'>
       
       <div className="min-w-[100px] md:min-w-[140px] bg-gray-200 dark:bg-[var(--sidebar)]">
         <img 
-          src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "/no-image.png"} 
+          src={posterUrl}
           className="w-full h-full object-cover"
           alt={item.title || item.name}
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = FALLBACK_POSTER;
+          }}
         />
       </div>
 

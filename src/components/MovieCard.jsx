@@ -36,6 +36,8 @@ const MovieCard = (props) => {
     navigate(`/movie/${movie.id}`);
   };
   
+  const FALLBACK_POSTER = "https://placehold.co/600x900/1c1c1c/2dd4bf?text=CineVerse";
+
   return (
     <div 
       className={`cursor-pointer group relative flex flex-col shrink-0 transition-all duration-300 ${isHorizontal ? "w-[300px]" : "w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px]"}`}
@@ -50,6 +52,10 @@ const MovieCard = (props) => {
           className={`w-full h-full object-cover transition-all duration-700 
             ${isRateOpen ? 'brightness-[0.2] scale-105' : 'group-hover:brightness-[0.3] group-hover:scale-110'}`}
           alt={title}
+          // This catches broken links even if poster_path was technically present
+          onError={(e) => {
+            e.currentTarget.src = FALLBACK_POSTER;
+          }}
         />
 
         <div className={`absolute inset-0 z-30 flex items-center justify-center transition-all duration-300
