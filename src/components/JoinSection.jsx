@@ -6,7 +6,7 @@ const JoinSection = () => {
       
       <div className="absolute inset-0 z-0">
        <img 
-        src="/image.jpg" 
+        src={`${import.meta.env.BASE_URL}image.jpg`}
         alt="Background" 
         className="w-full h-full object-cover opacity-50 relative z-0" 
   />
