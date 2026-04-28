@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { Heart, Bookmark, Star } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useMovieStore } from "@/Store/zustand/useMovieStore";
 
 function MovieEngagement({ movie }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [isWatchlisted, setIsWatchlisted] = useState(false);
+  const { favorites, watchlist, toggleFavorite, toggleWatchlist } =
+    useMovieStore();
+  const isFavorite = favorites?.find((f) => f.id === movie.id) || false;
+  const isWatchlisted = watchlist?.some((w) => w.id === movie.id) || false;
 
   return (
     <div className="mt-4 flex items-center gap-4">
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            onClick={() => setIsFavorite(!isFavorite)}
+            onClick={() => toggleFavorite(movie)}
             className={`cursor-pointer transition-colors ${isFavorite ? "text-destructive" : "text-muted-foreground hover:text-destructive"}`}
           >
             <Heart
@@ -33,7 +36,7 @@ function MovieEngagement({ movie }) {
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            onClick={() => setIsWatchlisted(!isWatchlisted)}
+            onClick={() => toggleWatchlist(movie)}
             className={`cursor-pointer transition-colors ${
               isWatchlisted
                 ? "text-primary"

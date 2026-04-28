@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import MovieEngagement from "@/components/MovieEngagement";
 import { formatRuntime } from "@/utils/movieHelpers";
 import MovieHeaderSkeleton from "./MovieHeaderSkeleton";
+import { Link } from "react-router";
 
 function MovieHeader({ movie, isLoading }) {
   if (isLoading) {
@@ -32,8 +33,13 @@ function MovieHeader({ movie, isLoading }) {
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {movie.genres?.map((genre) => (
-          <Badge key={genre.id} variant="outline" className="p-3 text-base">
-            {genre.name}
+          <Badge
+            key={genre.id}
+            variant="outline"
+            asChild
+            className="hover:bg-primary/25! hover:text-foreground! cursor-pointer p-3 text-base transition-all duration-200"
+          >
+            <Link to={`/movie/discover?genre=${genre.id}`}>{genre.name}</Link>
           </Badge>
         ))}
       </div>
