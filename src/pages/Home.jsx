@@ -1,58 +1,89 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable no-unused-vars */
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tmdbApi from '../services/axiosConfig';
-import { useMovieStore } from '@/Store/zustand/useMovieStore'; 
 import Hero from '../components/Hero';
-import TrailersSection from '../components/TrailersSection';
 import MovieSection from '../components/MovieSection';
+import TrailersSection from '../components/TrailersSection';
 import JoinSection from '../components/JoinSection';
-import MovieCard from '../components/MovieCard';
-import MovieCardSkeleton from '../components/MovieCardSkeleton';
-import { Search, TrendingUp } from 'lucide-react';
+import { Film, Star, ArrowRight, Loader2 } from 'lucide-react';
 
 function Home() {
-  const navigate = useNavigate();
-  const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState(""); 
-  const [navSearchTerm, setNavSearchTerm] = useState(""); 
-  const [isSearching, setIsSearching] = useState(false);
-  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [apiTrending, setApiTrending] = useState([]); // لحفظ الداتا من الـ API
+  const [quickResults, setQuickResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoadingQuick, setIsLoadingQuick] = useState(false);
+  const [inputStyle, setInputStyle] = useState({ width: 0, top: 0, left: 0 });
+  
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const fetchTrending = async () => {
-      try {
-        const { data } = await tmdbApi.get('/trending/all/day');
-        const trends = data.results.slice(0, 10).map(item => item.title || item.name);
-        setApiTrending(trends);
-      } catch (err) {
-        console.error("Failed to fetch trending", err);
-      }
-    };
-    fetchTrending();
-  }, []);
-
-  const handleHeroSearch = async () => {
-    if (!searchTerm.trim()) { setIsSearching(false); return; }
-    try {
-      setIsSearching(true);
-      setIsLoadingSearch(true);
-      const { data } = await tmdbApi.get('/search/multi', { params: { query: searchTerm } });
-      const filtered = (data.results || []).filter(item => item.poster_path);
-      setSearchResults(filtered);
-    } catch (err) { console.error("Search failed", err); } 
-    finally { setIsLoadingSearch(false); }
-  };
-
-  const handleNavAction = (term) => {
-    const finalTerm = term || navSearchTerm;
-    if (finalTerm.trim()) {
-      setIsDropdownOpen(false);
-      navigate(`/search?query=${encodeURIComponent(finalTerm)}`);
+  const updateInputPosition = () => {
+    const heroInput = document.querySelector('input[type="text"]');
+    if (heroInput) {
+      const rect = heroInput.getBoundingClientRect();
+      setInputStyle({
+        width: rect.width,
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX
+      });
     }
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    if (!searchTerm.trim()) {
+      setQuickResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const delayDebounceFn = setTimeout(async () => {
+      setIsLoadingQuick(true);
+      setShowDropdown(true);
+      updateInputPosition();
+
+      try {
+        const { data } = await tmdbApi.get('/search/multi', { 
+          params: { query: searchTerm, language: 'en-US' },
+          signal: controller.signal 
+        });
+        const filtered = (data.results || []).filter(item => item.poster_path).slice(0, 5);
+        setQuickResults(filtered);
+      } catch (err) {
+        if (err.name !== 'CanceledError') console.error(err);
+      } finally {
+        setIsLoadingQuick(false);
+      }
+    }, 450);
+
+    return () => {
+      clearTimeout(delayDebounceFn);
+      controller.abort();
+    };
+  }, [searchTerm]);
+
+  const handleHeroSearch = () => {
+    if (!searchTerm.trim()) return;
+    setShowDropdown(false);
+    navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setShowDropdown(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("resize", updateInputPosition);
+    window.addEventListener("scroll", updateInputPosition);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", updateInputPosition);
+      window.removeEventListener("scroll", updateInputPosition);
+    };
+  }, []);
 
   const trendingEndpoints = useMemo(() => ({ Today: '/trending/all/day', This_Week: '/trending/all/week' }), []);
   const popularEndpoints = useMemo(() => ({ Streaming: '/tv/popular', On_TV: '/tv/top_rated', For_Rent: '/movie/upcoming', In_Theaters: '/movie/now_playing' }), []);
@@ -61,79 +92,83 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--background)] to-[var(--card)] text-[var(--foreground)] transition-colors duration-500">
       
-      <div className="fixed top-[64px] left-0 right-0 z-[100] bg-white border-b border-gray-200 w-full py-1.5 px-10">
-        <div className="max-w-7xl mx-auto relative">
-            <div className="relative flex items-center h-8">
-                <Search className="absolute left-0 text-gray-400" size={16} />
-                <input 
-                    type="text"
-                    placeholder="Search for a movie, tv show, person..."
-                    className="w-full bg-transparent text-black pl-7 pr-4 outline-none text-sm italic placeholder:text-gray-400"
-                    value={navSearchTerm}
-                    onFocus={() => setIsDropdownOpen(true)}
-                    onChange={(e) => setNavSearchTerm(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleNavAction()}
-                />
-            </div>
+      <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handleHeroSearch} />
 
-            {isDropdownOpen && (
-                <div className="absolute top-full left-[-40px] right-[-40px] bg-white shadow-2xl z-[110] border-t border-gray-100 max-h-[400px] overflow-y-auto">
-                    <div className="sticky top-0 bg-gray-50 px-10 py-2 border-b border-gray-200 flex items-center gap-2 text-black z-10">
-                        <TrendingUp size={16} />
-                        <span className="text-sm font-bold uppercase tracking-wider">Trending Right Now</span>
+      {showDropdown && (
+        <div 
+          ref={dropdownRef}
+          style={{ 
+            position: 'absolute', 
+            top: `${inputStyle.top + 8}px`, 
+            left: `${inputStyle.left}px`, 
+            width: `${inputStyle.width}px` 
+          }}
+          className="bg-[var(--card)]/90 backdrop-blur-2xl rounded-2xl border border-[var(--border)] shadow-[0_20px_50px_rgba(0,0,0,0.3)] z-[9999] overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        >
+          <div className="p-2">
+            {isLoadingQuick ? (
+              <div className="p-8 text-center text-[var(--muted-foreground)] flex items-center justify-center gap-3 italic text-sm">
+                <Loader2 className="animate-spin text-[var(--primary)]" size={18} />
+                <span>Searching for titles...</span>
+              </div>
+            ) : quickResults.length > 0 ? (
+              <div className="flex flex-col">
+                {quickResults.map((item) => (
+                  <div 
+                    key={item.id}
+                    onClick={() => {
+                      setShowDropdown(false);
+                      navigate(`/search?query=${encodeURIComponent(item.title || item.name)}`);
+                    }}
+                    className="flex items-center gap-4 p-3 hover:bg-[var(--primary)]/10 rounded-xl cursor-pointer transition-all group/item"
+                  >
+                    <img src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} className="w-10 h-14 object-cover rounded-lg shadow-sm" alt="" />
+                    <div className="flex flex-col text-left overflow-hidden">
+                      <span className="font-semibold truncate group-hover/item:text-[var(--primary)] transition-colors">
+                        {item.title || item.name}
+                      </span>
+                      <div className="flex items-center gap-3 mt-1 text-[11px] text-[var(--muted-foreground)] font-medium">
+                        <span className="flex items-center gap-1 text-yellow-500">
+                          <Star size={12} fill="currentColor"/> {item.vote_average?.toFixed(1)}
+                        </span>
+                        <span>{(item.release_date || item.first_air_date)?.split('-')[0]}</span>
+                      </div>
                     </div>
-                    <div className="flex flex-col px-6">
-                        {apiTrending.map((item, index) => (
-                            <button
-                                key={index}
-                                onMouseDown={() => handleNavAction(item)}
-                                className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-left border-b border-gray-50 last:border-0"
-                            >
-                                <Search size={14} className="text-gray-400" />
-                                <span className="text-sm text-gray-800 font-medium">{item}</span>
-                            </button>
-                        ))}
-                    </div>
-                    <div className="fixed inset-0 -z-10" onMouseDown={() => setIsDropdownOpen(false)}></div>
-                </div>
+                    <ArrowRight className="ml-auto text-[var(--muted-foreground)] opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-1 transition-all" size={18} />
+                  </div>
+                ))}
+                
+                <button 
+                  onClick={handleHeroSearch}
+                  className="w-full mt-1 p-3 text-xs font-bold text-[var(--muted-foreground)] hover:text-[var(--primary)] border-t border-[var(--border)] hover:bg-[var(--secondary)] transition-all rounded-b-xl"
+                >
+                  See all results for "{searchTerm}"
+                </button>
+              </div>
+            ) : (
+              <div className="p-8 text-center text-[var(--muted-foreground)] text-sm italic">
+                No matching results found.
+              </div>
             )}
+          </div>
         </div>
-      </div>
-
-      <div className="pt-12">
-        <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handleHeroSearch} />
-      </div>
+      )}
       
       <main className="space-y-4 pt-10">
-        {isSearching ? (
-          <section className="max-w-7xl mx-auto px-6 py-12">
-            <h2 className="text-3xl font-bold text-[var(--primary)] mb-10 flex items-center gap-3">
-              <span className="w-2 h-8 bg-[var(--primary)] rounded-full"></span>
-              Search Results
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-8">
-              {isLoadingSearch ? (
-                [...Array(12)].map((_, i) => <MovieCardSkeleton key={i} />)
-              ) : (
-                searchResults.length > 0 ? (
-                  searchResults.map(movie => <MovieCard key={movie.id} item={movie} isSearchView={true} />)
-                ) : (
-                  <div className="col-span-full py-20 text-center opacity-40 text-xl italic text-[var(--muted-foreground)]">No results match...</div>
-                )
-              )}
-            </div>
-          </section>
-        ) : (
-          <div className="flex flex-col gap-16 pb-20">
-            <MovieSection title="Trending" endpoints={trendingEndpoints} />
-            <div className="py-4 bg-[var(--secondary)]/30 backdrop-blur-sm border-y border-[var(--border)]">
-                <TrailersSection /> 
-            </div>
-            <MovieSection title="What's Popular" endpoints={popularEndpoints} />
-            <MovieSection title="Free To Watch" endpoints={freeEndpoints} />
-            <JoinSection />
+        <div className="flex flex-col gap-16 pb-20">
+          
+          <MovieSection title="Trending" endpoints={trendingEndpoints} />
+          
+          <div className="py-4 bg-[var(--secondary)]/20 backdrop-blur-sm border-y border-[var(--border)] shadow-inner">
+              <TrailersSection /> 
           </div>
-        )}
+
+          <MovieSection title="What's Popular" endpoints={popularEndpoints} />
+          
+          <MovieSection title="Free To Watch" endpoints={freeEndpoints} />
+          
+          <JoinSection />
+        </div>
       </main>
     </div>
   );
