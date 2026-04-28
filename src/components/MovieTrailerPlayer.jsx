@@ -29,7 +29,7 @@ export default function MovieTrailerPlayer({ movieId, movie }) {
       : null;
 
     return (
-      <div className="bg-muted/20 border-border/50 group relative aspect-video w-full overflow-hidden rounded-3xl border">
+      <div className="bg-muted/20 border-border/50 group relative aspect-video max-h-60 w-full overflow-hidden rounded-3xl border md:max-h-96">
         {backdropUrl ? (
           <img
             src={backdropUrl}
