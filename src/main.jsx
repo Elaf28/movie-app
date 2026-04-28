@@ -15,6 +15,8 @@ import FavoritesList from './pages/FavoritesList';
 import SearchPage from './pages/SearchPages';
 import Profile from './pages/Profile';
 import DiscoverMovies from './pages/DiscoverMovies';
+import GuestRoute from './components/GuestRoute';
+import ProtectedRoute from './components/ProtectedRoute';
 import MovieDetails from "./pages/MovieDetails";
 
 
@@ -30,11 +32,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'register',
-        element: <Register />,
+        element: (
+          <GuestRoute>
+            <Register />
+          </GuestRoute>
+        ),
       },
       {
         path: 'login',
-        element: <Login />,
+        element: (
+          <GuestRoute>
+            <Login />
+          </GuestRoute>
+        ),
       },
       {
         path: 'home',
@@ -55,11 +65,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'favorites',
-        element: <FavoritesList />,
+        element: (
+          <ProtectedRoute>
+            <FavoritesList />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'watchlist',
-        element: <Watchlist />,
+        element: (
+          <ProtectedRoute>
+            <Watchlist />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/search',
@@ -67,7 +85,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
