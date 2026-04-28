@@ -2,17 +2,23 @@
 import React from 'react';
 import { Heart, Bookmark, Star } from 'lucide-react';
 import { useMovieStore } from '@/Store/zustand/useMovieStore'; 
+import { useNavigate } from 'react-router';
 
 const SearchCard = ({ item }) => {
   const { favorites, watchlist, toggleFavorite, toggleWatchlist } = useMovieStore();
-  
+  const navigate = useNavigate()
+
   const isFavorite = favorites.some(f => f.id === item.id);
   const isInWatchlist = watchlist.some(w => w.id === item.id);
   
   const siteStars = Math.round((item.vote_average || 0) / 2);
 
+  const handleCardClick = () => {
+    navigate(`/movie/${item.id}`);
+  };
+
   return (
-    <div className="flex w-full bg-white dark:bg-[var(--card)] border border-gray-200 dark:border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-[160px] md:h-[200px] mb-6">
+    <div className="flex w-full bg-white dark:bg-[var(--card)] border border-gray-200 dark:border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all h-[160px] md:h-[200px] mb-6 cursor-pointer hover:ring-2 hover:ring-primary" onClick={handleCardClick} role='link'>
       
       <div className="min-w-[100px] md:min-w-[140px] bg-gray-200 dark:bg-[var(--sidebar)]">
         <img 
