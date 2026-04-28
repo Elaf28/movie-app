@@ -23,7 +23,7 @@ function MovieDetails() {
     <>
       <Container className="py-3 md:py-6 lg:py-10">
         <div className="w-full">
-          <MovieTrailerPlayer movieId={id} />
+          <MovieTrailerPlayer movieId={id} movie={movie} />
         </div>
 
         <div className="relative mt-6 grid grid-cols-1 gap-4 lg:mt-4 lg:grid-cols-[300px_1fr] lg:gap-8">

@@ -8,7 +8,7 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
-import { Play } from "lucide-react";
+import { Film, Play } from "lucide-react";
 
 import "@vidstack/react/player/styles/base.css";
 import "@vidstack/react/player/styles/default/theme.css";
@@ -16,11 +16,36 @@ import "@vidstack/react/player/styles/default/layouts/video.css";
 import { useMovieVideos } from "@/hooks/useMovieVideos";
 import MovieTrailerPlayerSkeleton from "./MovieTrailerPlayerSkeleton";
 
-export default function MovieTrailerPlayer({ movieId }) {
+export default function MovieTrailerPlayer({ movieId, movie }) {
   const { trailer, isLoading } = useMovieVideos(movieId);
 
   if (isLoading) {
     return <MovieTrailerPlayerSkeleton />;
+  }
+
+  if (!trailer || !trailer.key) {
+    const backdropUrl = movie.backdrop_path
+      ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
+      : null;
+
+    return (
+      <div className="bg-muted/20 border-border/50 group relative aspect-video w-full overflow-hidden rounded-3xl border">
+        {backdropUrl ? (
+          <img
+            src={backdropUrl}
+            alt={movie.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="text-muted-foreground absolute inset-0 flex flex-col items-center justify-center gap-4">
+            <Film size={48} strokeWidth={1} />
+            <p>No preview available</p>
+          </div>
+        )}
+
+        <div className="from-background/60 to-background/20 absolute inset-0 bg-gradient-to-t via-transparent" />
+      </div>
+    );
   }
 
   const thumbnail = `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`;
