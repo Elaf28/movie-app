@@ -19,7 +19,7 @@ const ThemeToggle = () => {
     return (
         <button
         onClick={() => setDarkMode(!darkMode)}
-        className="text-4xl md:text-5xl hover:text-primary transition cursor-pointer bg-card/50 backdrop-blur-md p-2 rounded-full shadow-md"
+        className="text-3xl md:text-4xl hover:text-primary transition cursor-pointer bg-card/50 backdrop-blur-md p-2 rounded-full shadow-md"
         >
         {darkMode ? (
             <HiSun className="hover:text-yellow-500" />
