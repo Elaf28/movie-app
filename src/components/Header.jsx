@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router'; 
 import { HiSun, HiMoon, HiHeart, HiBookmark, HiMenu } from 'react-icons/hi';
 import { useAuthStore } from '../Store/zustand/useAuthStore';
+import { Badge } from "@/components/ui/badge";
+import { useMovieStore } from '@/Store/zustand/useMovieStore';
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(
@@ -10,6 +12,8 @@ const Navbar = () => {
 
   const { user, logout } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
+  const watchlist = useMovieStore((state) => state.watchlist);
+  const favorites = useMovieStore((state) => state.favorites);
 
   useEffect(() => {
     if (darkMode) {
@@ -49,12 +53,22 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-5">
             {user ? (
               <>
-                <Link to="/favorites">
-                  <HiHeart size={24} className="hover:text-destructive cursor-pointer transition" />
+                <Link to="/favorites" className="relative">
+                  <HiHeart size={28} className="hover:text-destructive cursor-pointer transition" />
+                  {favorites.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 min-w-5 flex items-center justify-center rounded-full px-1 text-[10px] font-bold">
+                      {favorites.length} 
+                    </Badge>
+                  )}
                 </Link>
 
-                <Link to="/watchlist">
-                  <HiBookmark size={24} className=" hover:text-yellow-500 cursor-pointer transition" />
+                <Link to="/watchlist" className="relative">
+                  <HiBookmark size={28} className=" hover:text-yellow-500 cursor-pointer transition" />
+                  {watchlist.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 bg-primary text-primary-foreground h-5 min-w-5 flex items-center justify-center rounded-full px-1 text-[10px] font-bold">
+                      {watchlist.length}
+                    </Badge>
+                  )}
                 </Link>
 
                 <Link to="/profile">
@@ -97,12 +111,22 @@ const Navbar = () => {
 
           {user ? (
             <>
-              <Link to="/favorites" onClick={() => setMenuOpen(false)}>
-                  <HiHeart size={24} className="hover:text-destructive cursor-pointer transition" /> 
+              <Link to="/favorites" onClick={() => setMenuOpen(false)} className="relative">
+                  <HiHeart size={28} className="hover:text-destructive cursor-pointer transition" /> 
+                  {favorites.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 min-w-5 flex items-center justify-center rounded-full px-1 text-[10px] font-bold">
+                      {favorites.length} 
+                    </Badge>
+                  )}
                 </Link>
 
-                <Link to="/watchlist" onClick={() => setMenuOpen(false)}>
-                  <HiBookmark size={24} className="hover:text-yellow-500 cursor-pointer transition" /> 
+                <Link to="/watchlist" onClick={() => setMenuOpen(false)} className="relative">
+                  <HiBookmark size={28} className="hover:text-yellow-500 cursor-pointer transition" /> 
+                  {watchlist.length > 0 && (
+                    <Badge className="absolute -top-2 -right-2 bg-primary text-primary-foreground h-5 min-w-5 flex items-center justify-center rounded-full px-1 text-[10px] font-bold">
+                      {watchlist.length}
+                    </Badge>
+                  )}
                 </Link>
 
                 <Link to="/profile" onClick={() => setMenuOpen(false)}>
