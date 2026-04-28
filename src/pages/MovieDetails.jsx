@@ -21,14 +21,14 @@ function MovieDetails() {
 
   return (
     <>
-      <Container className="py-3 md:py-6 lg:py-10">
+      <Container className="pt-30 pb-8">
         <div className="w-full">
           <MovieTrailerPlayer movieId={id} movie={movie} />
         </div>
 
         <div className="relative mt-6 grid grid-cols-1 gap-4 lg:mt-4 lg:grid-cols-[300px_1fr] lg:gap-8">
           <div className="flex flex-row-reverse justify-between gap-4 lg:relative lg:block">
-            <div className="w-[150px] lg:sticky lg:top-20 lg:w-full">
+            <div className="w-[150px] lg:sticky lg:top-24 lg:w-full">
               <div className="overflow-hidden rounded-2xl">
                 <img
                   src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}

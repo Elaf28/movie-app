@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import tmdbApi from '../services/axiosConfig';
 import { useMovieActions } from '../hooks/useMovieActions';
 import MovieCard from './MovieCard';
+import ScrollableRow from './ScrollableRow';
 
 const TrailersSection = () => {
   const [trailers, setTrailers] = useState([]);
@@ -49,13 +50,15 @@ const TrailersSection = () => {
           </div>
         </div>
 
-        <div className="flex gap-6 overflow-x-auto pb-6 custom-scrollbar">
+        {/* <div className="flex gap-6 overflow-x-auto pb-6 custom-scrollbar"> */}
+        <ScrollableRow className="py-7 whitespace-nowrap">
           {trailers.map(item => (
             <div key={item.id} onMouseEnter={() => setBgImage(`https://image.tmdb.org/t/p/original${item.backdrop_path}`)}>
               <MovieCard item={item} actions={actions} isHorizontal={true} />
             </div>
           ))}
-        </div>
+        </ScrollableRow>
+        {/* </div> */}
       </div>
     </section>
   );

@@ -73,7 +73,7 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.78 0.14 180); /* teal — slightly muted for light bg */
+  --primary: oklch(74.418% 0.13337 179.874); /* teal — slightly muted for light bg */
   --primary-foreground: oklch(0.1 0 0); /* near-black text on teal */
   --secondary: oklch(0.93 0 0);
   --secondary-foreground: oklch(0.2 0 0);
@@ -147,3 +147,28 @@
     @apply font-sans;
   }
 }
+
+/* @layer base {
+  body {
+    background: radial-gradient(
+      circle at 50% 0%,
+      var(--background) 0%,
+      oklch(0.92 0 0) 50%,
+      oklch(0.88 0 0) 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+    @apply text-foreground antialiased;
+  }
+
+  .dark body {
+    background: radial-gradient(
+      circle at 50% 0%,
+      oklch(0.25 0 0) 0%,
+      var(--background) 50%,
+      oklch(0.1 0 0) 100%
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+} */

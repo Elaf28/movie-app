@@ -81,6 +81,7 @@ const ActionButton = ({ active, onClick, Icon, activeColor }) => (
   <button 
     onClick={(e) => {
       e.preventDefault(); 
+      e.stopPropagation();
       onClick(); 
     }} 
     className={`p-2 rounded-full transition-all ${active ? activeColor : 'text-zinc-300 dark:text-[var(--chart-2)]/50 hover:bg-zinc-100 dark:hover:bg-[var(--secondary)]'}`}
