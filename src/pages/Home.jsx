@@ -19,7 +19,6 @@ function Home() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  // حساب أبعاد الـ Input بارتفاعه وعرضه ومكانه بالملي
   const updateInputPosition = () => {
     const heroInput = document.querySelector('input[type="text"]');
     if (heroInput) {
@@ -32,7 +31,6 @@ function Home() {
     }
   };
 
-  // البحث الفوري (Dropdown) - مع معالجة الـ Blinking والـ Race Condition
   useEffect(() => {
     const controller = new AbortController();
 
@@ -52,7 +50,6 @@ function Home() {
           params: { query: searchTerm, language: 'en-US' },
           signal: controller.signal 
         });
-        // فلترة النتائج اللي فيها صور بس وعرض أول 5
         const filtered = (data.results || []).filter(item => item.poster_path).slice(0, 5);
         setQuickResults(filtered);
       } catch (err) {
@@ -68,14 +65,12 @@ function Home() {
     };
   }, [searchTerm]);
 
-  // دالة الذهاب لصفحة السيرش الكاملة
   const handleHeroSearch = () => {
     if (!searchTerm.trim()) return;
     setShowDropdown(false);
     navigate(`/search?query=${encodeURIComponent(searchTerm)}`);
   };
 
-  // إغلاق عند الضغط بالخارج وتحديث المكان عند تغيير حجم الشاشة
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setShowDropdown(false);
@@ -97,10 +92,8 @@ function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--background)] to-[var(--card)] text-[var(--foreground)] transition-colors duration-500">
       
-      {/* قسم الهيرو مع دالة البحث */}
       <Hero searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={handleHeroSearch} />
 
-      {/* Dropdown النتائج الفورية - Glass Style */}
       {showDropdown && (
         <div 
           ref={dropdownRef}
@@ -161,7 +154,6 @@ function Home() {
         </div>
       )}
       
-      {/* الأقسام الرئيسية للصفحة */}
       <main className="space-y-4 pt-10">
         <div className="flex flex-col gap-16 pb-20">
           
