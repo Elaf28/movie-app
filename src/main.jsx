@@ -15,10 +15,12 @@ import FavoritesList from './pages/FavoritesList';
 import SearchPage from './pages/SearchPages';
 import Profile from './pages/Profile';
 import DiscoverMovies from './pages/DiscoverMovies';
+import MovieDetails from "./pages/MovieDetails";
+
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     children: [
       // Root Route
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
           {
             path: 'discover',
             element: <DiscoverMovies />,
+          },
+          {
+            path: ":id",
+            element: <MovieDetails />,
           },
         ],
       },
@@ -71,7 +77,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <TooltipProvider>
       <RouterProvider router={router} />
