@@ -35,13 +35,13 @@ const MovieSection = ({ title, endpoints }) => {
   return (
     <section className="max-w-7xl mx-auto px-6 py-8">
       <div className="flex items-center gap-5 mb-6">
-        <h2 className="text-2xl font-bold text-[#032541]">{title}</h2>
-        <div className="flex border-2 border-[#032541] rounded-full font-semibold overflow-hidden shadow-sm">
+        <h2 className="text-2xl font-bold text-[var(--foreground)]">{title}</h2>
+        <div className="flex border-2 border-[var(--primary)] rounded-full font-semibold overflow-hidden shadow-sm">
           {Object.keys(endpoints).map((tab) => (
             <button 
               key={tab} 
               onClick={() => setActiveTab(tab)} 
-              className={`px-5 py-1 capitalize transition-all text-sm ${activeTab === tab ? 'bg-[#032541] text-[#90cea1]' : 'bg-white text-[#032541] hover:bg-gray-100'}`}
+              className={`px-5 py-1 capitalize transition-all text-sm ${activeTab === tab ? 'bg-[var(--primary)] text-[var(--primary-foreground)]' : 'bg-transparent text-[var(--foreground)] hover:bg-[var(--muted)]'}`}
             >
               {tab.replace(/_/g, ' ')}
             </button>
