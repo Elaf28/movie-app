@@ -2,13 +2,15 @@ import React from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ScrollableRow from "./ScrollableRow";
 
 function TopCast({ topCast }) {
   return (
     <div className="mt-8">
       <h2 className="text-xl font-medium sm:text-2xl">Top Cast</h2>
-      <ScrollArea className="py-6 whitespace-nowrap">
-        <div className="flex space-x-4 sm:space-x-8">
+      {/* <ScrollArea className="py-6 whitespace-nowrap"> */}
+      <ScrollableRow>
+        <div className="flex space-x-4 py-6 sm:space-x-8">
           {topCast.map((actor) => (
             <figure
               key={actor.id}
@@ -34,8 +36,9 @@ function TopCast({ topCast }) {
             </figure>
           ))}
         </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+        {/* <ScrollBar orientation="horizontal" />
+      </ScrollArea> */}
+      </ScrollableRow>
     </div>
   );
 }
