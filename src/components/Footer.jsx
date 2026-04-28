@@ -1,63 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#031d33]  text-white py-12 px-10 relative overflow-hidden ">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#90cea1] via-[#01b4e4] to-[#90cea1]"></div>
-
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-        
-        <div className="flex flex-col gap-6">
-          <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#90cea1] to-[#01b4e4]">
-            T&M
+    <footer className="bg-background text-foreground border-t border-border ">
+      
+      <div className="mx-auto px-5 md:px-15 lg:px-30 py-12 flex justify-between gap-8 flex-col md:flex-row">
+        <div className="flex flex-col gap-4">
+          <h2 style={{ fontFamily: '"Creepster", cursive' }} className="text-3xl font-bold bg-gradient-to-r from-primary to-accent text-transparent bg-clip-text">
+            CineVerse
           </h2>
-          <Link 
-            to="/join" 
-            className="bg-[#01b4e4] text-[#032541] font-bold py-2 px-6 rounded-lg hover:bg-white transition-all text-center w-fit shadow-lg shadow-cyan-500/20"
-          >
-            JOIN THE COMMUNITY
-          </Link>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Discover movies, explore trending content, and build your personal
+            watchlist — all in one place.
+          </p>
         </div>
 
         <div>
-          <h3 className="text-xl font-bold uppercase mb-5 tracking-wider text-[#90cea1]">The Basics</h3>
-          <ul className="space-y-3 opacity-80 font-medium">
-            <li><a href="#" className="hover:text-[#01b4e4] transition">About T&M</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Contact Us</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Support Forums</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">System Status</a></li>
+          <h3 className="text-lg font-semibold mb-4">Explore</h3>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            <li>
+              <Link to="/Home" className="hover:text-primary transition">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/movie/discover" className="hover:text-primary transition">
+                Discover
+              </Link>
+            </li>
+            <li>
+              <Link to="/favorites" className="hover:text-primary transition">
+                Favorites
+              </Link>
+            </li>
+            <li>
+              <Link to="/watchlist" className="hover:text-primary transition">
+                Watchlist
+              </Link>
+            </li>
           </ul>
         </div>
 
-        <div>
-          <h3 className="text-xl font-bold uppercase mb-5 tracking-wider text-[#90cea1]">Community</h3>
-          <ul className="space-y-3 opacity-80 font-medium">
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Guidelines</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Discussions</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Leaderboard</a></li>
-            <li><a href="#" className="hover:text-[#01b4e4] transition">Twitter</a></li>
-          </ul>
-        </div>
-
-        <div className="flex flex-col gap-6">
-          <h3 className="text-xl font-bold uppercase tracking-wider text-[#90cea1]">Follow Us</h3>
-          <div className="flex gap-5 text-2xl">
-            <FaFacebook className="hover:text-[#01b4e4] cursor-pointer transition transform hover:-translate-y-1" />
-            <FaTwitter className="hover:text-[#01b4e4] cursor-pointer transition transform hover:-translate-y-1" />
-            <FaInstagram className="hover:text-[#01b4e4] cursor-pointer transition transform hover:-translate-y-1" />
-            <FaLinkedin className="hover:text-[#01b4e4] cursor-pointer transition transform hover:-translate-y-1" />
-          </div>
-          <div className="mt-4">
-             <p className="text-xs opacity-50 uppercase font-bold">Legal</p>
-             <p className="text-sm opacity-70">Terms of Use | Privacy Policy</p>
+        <div className="flex flex-col gap-4">
+          <h3 className="text-lg font-semibold">Follow</h3>
+          <div className="flex gap-4 text-xl text-muted-foreground">
+            <a href="https://www.facebook.com/" target="_blank" className="hover:text-primary transition">
+              <FaFacebook />
+            </a>
+            <a href="https://twitter.com/" target="_blank" className="hover:text-primary transition">
+              <FaXTwitter />
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" className="hover:text-primary transition">
+              <FaInstagram />
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" className="hover:text-primary transition">
+              <FaLinkedin />
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="mt-16 pt-8 border-t border-white/10 text-center opacity-40 text-sm italic">
-        <p>© 2026 T&M Movie Database. Crafted with ❤️ for ITI React Project.</p>
+      <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
+        © {new Date().getFullYear()} CineVerse. All rights reserved.
       </div>
     </footer>
   );

@@ -15,7 +15,7 @@ const Hero = ({ searchTerm, setSearchTerm }) => {
       
       <div className="absolute inset-0 z-0 w-full h-full">
         <img 
-          src="/img3.jpg" 
+          src={`${import.meta.env.BASE_URL}img3.jpg`}
           alt="Background" 
           className="w-full h-full object-cover transition-opacity duration-500" 
         />

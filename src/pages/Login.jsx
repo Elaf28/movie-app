@@ -47,7 +47,7 @@ const Login = () => {
         <div className="min-h-screen relative overflow-hidden font-sans">
 
         <img
-            src="/The first trailer for Avatar.jpg"
+            src={`${import.meta.env.BASE_URL}The first trailer for Avatar.jpg`}
             className="absolute inset-0 w-full h-full object-cover"
             alt="Background"
         />
