@@ -2,32 +2,32 @@ import React from 'react';
 
 const JoinSection = () => {
   return (
-    <section className="relative bg-[#240046] py-16 mb-10 px-10 text-white overflow-hidden mx-3">
+    <section className="relative bg-[var(--card)] py-16 mb-10 px-10 text-[var(--foreground)] overflow-hidden mx-3 rounded-xl border border-[var(--border)]">
       
       <div className="absolute inset-0 z-0">
-       <img 
-        src="/image.jpg" 
-        alt="Background" 
-        className="w-full h-full object-cover opacity-50 relative z-0" 
-  />
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(90,24,154,0.8)] to-[rgba(36,0,70,0.6)]"></div>
+        <img 
+          src="/image.jpg" 
+          alt="Background" 
+          className="w-full h-full object-cover opacity-10 relative z-0" 
+        />
+        <div className="absolute inset-0 "></div>
       </div>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
         <div className="md:w-3/5">
-          <h4 className="text-5xl font-bold mb-5 leading-tight">Join Today</h4>
+          <h4 className="text-5xl font-bold mb-5 leading-tight text-[var(--primary)]">Join Today</h4>
           <p className="text-xl mb-8 opacity-90 leading-relaxed">
-            Get access to maintain your own <span className="italic opacity-70">custom personal lists</span>, track what you've seen and search and filter for <span className="italic opacity-70">what to watch next</span>—regardless if it's in theatres, on TV or available on popular streaming services like Netflix, Amazon Prime Video, Apple TV, Disney Plus, and Hulu.
+            Get access to maintain your own <span className="italic text-[var(--primary)]">custom personal lists</span>, track what you've seen and search and filter for <span className="italic text-[var(--primary)]">what to watch next</span>.
           </p>
-          <button className="bg-[#805ad5] px-10 py-3 rounded-md font-bold hover:bg-white hover:text-[#5a189a] transition-all duration-300 shadow-lg">
+          <button className="bg-[var(--primary)] text-[var(--primary-foreground)] px-10 py-3 rounded-md font-bold hover:brightness-110 transition-all duration-300 shadow-lg">
             Sign Up
           </button>
         </div>
         
         <div className="md:w-2/5 text-sm opacity-80 space-y-4">
-          <ul className="list-disc list-outside pl-5 space-y-2.5">
+          <ul className="list-disc list-outside pl-5 space-y-2.5 text-[var(--muted-foreground)]">
             <li>Maintain a personal watchlist</li>
-            <li>Filter by your subscribed streaming services and find something to watch</li>
+            <li>Filter by your subscribed streaming services</li>
             <li>Log the movies and TV shows you've seen</li>
             <li>Build custom lists</li>
             <li>Contribute to and improve our database</li>

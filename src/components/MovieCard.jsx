@@ -36,8 +36,8 @@ const MovieCard = (props) => {
 
   if (isSearchView) {
     return (
-      <div className="flex w-full bg-white dark:bg-[var(--card)] border border-gray-200 dark:border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-4 h-[160px] md:h-[200px]">
-        <div className="min-w-[100px] md:min-w-[140px] relative bg-gray-100 dark:bg-[var(--sidebar)]">
+      <div className="flex w-full bg-[var(--card)] border border-[var(--border)] rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-4 h-[160px] md:h-[200px]">
+        <div className="min-w-[100px] md:min-w-[140px] relative bg-[var(--muted)]">
           <img 
             src={posterUrl} 
             className="w-full h-full object-cover"
@@ -49,33 +49,33 @@ const MovieCard = (props) => {
           <div className="flex justify-between items-start">
             <div>
               <Link to={`/movie/${movie.id}`}>
-                <h3 className="font-bold text-[17px] text-[#032541] dark:text-white hover:text-[var(--primary)] transition-colors line-clamp-1">
+                <h3 className="font-bold text-[17px] text-[var(--foreground)] hover:text-[var(--primary)] transition-colors line-clamp-1">
                   {title}
                 </h3>
               </Link>
-              <p className="text-gray-400 text-sm">{releaseDate}</p>
+              <p className="text-[var(--muted-foreground)] text-sm">{releaseDate}</p>
             </div>
             
             <div className="flex gap-2">
-              <button onClick={() => toggleFavorite(movie)} className={`${isFavorite ? 'text-red-600' : 'text-gray-300 hover:text-red-500'}`}>
+              <button onClick={() => toggleFavorite(movie)} className={`${isFavorite ? 'text-red-600' : 'text-[var(--muted-foreground)] hover:text-red-500'}`}>
                 <Heart size={18} fill={isFavorite ? "currentColor" : "none"} />
               </button>
-              <button onClick={() => toggleWatchlist(movie)} className={`${isInWatchlist ? 'text-blue-600' : 'text-gray-300 hover:text-blue-500'}`}>
+              <button onClick={() => toggleWatchlist(movie)} className={`${isInWatchlist ? 'text-[var(--primary)]' : 'text-[var(--muted-foreground)] hover:text-[var(--primary)]'}`}>
                 <Bookmark size={18} fill={isInWatchlist ? "currentColor" : "none"} />
               </button>
             </div>
           </div>
 
-          <p className="text-gray-600 dark:text-gray-300 text-sm mt-3 line-clamp-2 leading-relaxed">
+          <p className="text-[var(--muted-foreground)] text-sm mt-3 line-clamp-2 leading-relaxed">
             {movie.overview || "No description available..."}
           </p>
 
           <div className="mt-auto flex items-center gap-3">
             <div className="flex items-center gap-0.5">
               {[1, 2, 3, 4, 5].map((s) => (
-                <Star key={s} size={12} className={siteStars >= s ? "text-yellow-500" : "text-gray-300"} fill={siteStars >= s ? "currentColor" : "none"} />
+                <Star key={s} size={12} className={siteStars >= s ? "text-yellow-500" : "text-[var(--border)]"} fill={siteStars >= s ? "currentColor" : "none"} />
               ))}
-              <span className="text-gray-400 text-[11px] ml-1">({siteAverage.toFixed(1)})</span>
+              <span className="text-[var(--muted-foreground)] text-[11px] ml-1">({siteAverage.toFixed(1)})</span>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@ const MovieCard = (props) => {
       className={`cursor-pointer group relative flex flex-col shrink-0 transition-all duration-300 ${isHorizontal ? "w-[300px]" : "w-[120px] sm:w-[140px] md:w-[160px] lg:w-[180px]"}`}
       onMouseLeave={() => setIsRateOpen(false)}
     >
-      <div className={`relative rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-[var(--card)] border border-gray-100 dark:border-[var(--border)] ${isHorizontal ? "h-[170px]" : "h-[180px] sm:h-[210px] md:h-[240px] lg:h-[270px]"}`}>
+      <div className={`relative rounded-2xl overflow-hidden shadow-lg bg-[var(--card)] border border-[var(--border)] ${isHorizontal ? "h-[170px]" : "h-[180px] sm:h-[210px] md:h-[240px] lg:h-[270px]"}`}>
         
         <img 
           src={posterUrl} 
@@ -125,16 +125,16 @@ const MovieCard = (props) => {
               
               {isRateOpen && (
                 <div 
-                  className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-white dark:bg-[var(--popover)] p-3 rounded-xl shadow-2xl z-[50] w-[150px] border border-gray-200 dark:border-[var(--border)]"
+                  className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-[var(--popover)] p-3 rounded-xl shadow-2xl z-[50] w-[150px] border border-[var(--border)]"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="flex justify-between items-center mb-2 border-b dark:border-[var(--border)] pb-1">
-                    <span className="text-[10px] font-black uppercase tracking-wider dark:text-[var(--chart-2)]">Rate It</span>
+                  <div className="flex justify-between items-center mb-2 border-b border-[var(--border)] pb-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[var(--foreground)]">Rate It</span>
                     <X size={14} className="text-gray-400 cursor-pointer hover:text-red-500" onClick={() => setIsRateOpen(false)} />
                   </div>
                   <div className="flex justify-center gap-1.5">
                     {[1, 2, 3, 4, 5].map((num) => (
-                      <Star key={num} size={18} className={`cursor-pointer transition-transform hover:scale-125 ${userRating >= num ? "text-yellow-500" : "text-gray-300 dark:text-[var(--border)]"}`} fill={userRating >= num ? "currentColor" : "none"} onClick={() => { setUserRating(num); setIsRateOpen(false); }} />
+                      <Star key={num} size={18} className={`cursor-pointer transition-transform hover:scale-125 ${userRating >= num ? "text-yellow-500" : "text-[var(--muted-foreground)]"}`} fill={userRating >= num ? "currentColor" : "none"} onClick={() => { setUserRating(num); setIsRateOpen(false); }} />
                     ))}
                   </div>
                 </div>
@@ -148,12 +148,12 @@ const MovieCard = (props) => {
         <Link to={`/movie/${movie.id}`}>
           <h3 className={`font-bold text-[15px] leading-tight line-clamp-1 transition-colors 
             ${isHorizontal 
-              ? "text-[var(--chart-2)] drop-shadow-sm hover:text-[var(--primary)]" 
-              : "text-[#032541] dark:text-[var(--chart-2)] hover:text-[var(--primary)]"}`}>
+              ? "text-[var(--foreground)] drop-shadow-sm hover:text-[var(--primary)]" 
+              : "text-[var(--foreground)] hover:text-[var(--primary)]"}`}>
             {title}
           </h3>
         </Link>
-        <p className={`text-[12px] mt-0.5 ${isHorizontal ? "text-[var(--muted-foreground)]" : "text-gray-500 dark:text-[var(--muted-foreground)]"}`}>
+        <p className={`text-[12px] mt-0.5 text-[var(--muted-foreground)]`}>
           {releaseDate}
         </p>
       </div>

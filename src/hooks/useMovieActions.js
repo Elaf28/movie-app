@@ -6,17 +6,10 @@ export const useMovieActions = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [userRatings, setUserRatings] = useState({});
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-  const getCurrentUser = () => JSON.parse(localStorage.getItem('user'));
-
-=======
   // دالة مساعدة لجلب اليوزر الحالي في أي لحظة
   const getCurrentUser = () => JSON.parse(localStorage.getItem('user'));
 
-  // دالة لجلب المفاتيح بناءً على يوزر معين
->>>>>>> main
+  // دالة لجلب المفاتيح بناءً على يوزر معين لضمان خصوصية بيانات كل مستخدم
   const getKeysForUser = (user) => {
     const userId = user ? user.username : 'guest';
     return {
@@ -27,11 +20,7 @@ export const useMovieActions = () => {
     };
   };
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
-  // 1. تحميل البيانات عند البداية
->>>>>>> main
+  // 1. تحميل البيانات من الـ LocalStorage عند بداية التشغيل
   useEffect(() => {
     const user = getCurrentUser();
     const { favKey, watchKey, ratingKey } = getKeysForUser(user);
@@ -43,9 +32,9 @@ export const useMovieActions = () => {
     setUserRatings(JSON.parse(localStorage.getItem(ratingKey)) || {});
   }, []);
 
-  // 2. دالة الـ Toggle
+  // 2. دالة الـ Toggle للإضافة أو الحذف من المفاتيح (Favorites / Watchlist)
   const toggleAction = useCallback((item, type) => {
-    const user = getCurrentUser(); // بنقرأ اليوزر هنا "فورا" عند الضغط
+    const user = getCurrentUser(); 
     const { favKey, watchKey, userId } = getKeysForUser(user);
 
     if (!user || userId === 'guest') {
@@ -67,7 +56,7 @@ export const useMovieActions = () => {
     });
   }, []);
 
-  // 3. دالة التقييم
+  // 3. دالة التقييم (Rating)
   const handleRate = useCallback((movieId, value) => {
     const user = getCurrentUser();
     const { ratingKey, userId } = getKeysForUser(user);
