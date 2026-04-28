@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import ScrollToTop from '@/components/ScrollToTop';
 import { useMovieStore } from '@/Store/zustand/useMovieStore';
 import React, { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -12,6 +13,7 @@ const MainLayout = () => {
   }, [sync]);
   return (
     <>
+      <ScrollToTop/>
       <div className="min-h-screen flex flex-col">
         <Header />
         <main>
