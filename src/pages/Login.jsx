@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { useNavigate } from "react-router";
 import { useAuthStore } from '@/Store/zustand/useAuthStore';
 import { Link } from "react-router";
+import ThemeToggle from '@/components/ThemeToggle';
 
 const loginSchema = z.object({
     email: z.string().email("Invalid email"),
@@ -45,7 +46,9 @@ const Login = () => {
 
     return (
         <div className="min-h-screen relative overflow-hidden font-sans">
-
+        <div className="absolute top-6 right-6 z-20">
+            <ThemeToggle />
+        </div>
         <img
             src={`${import.meta.env.BASE_URL}The first trailer for Avatar.jpg`}
             className="absolute inset-0 w-full h-full object-cover"
