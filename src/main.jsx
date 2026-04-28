@@ -31,22 +31,6 @@ const router = createBrowserRouter(
           element: <App />,
         },
         {
-          path: "register",
-          element: (
-            <GuestRoute>
-              <Register />
-            </GuestRoute>
-          ),
-        },
-        {
-          path: "login",
-          element: (
-            <GuestRoute>
-              <Login />
-            </GuestRoute>
-          ),
-        },
-        {
           path: "home",
           element: <Home />,
         },
@@ -92,6 +76,22 @@ const router = createBrowserRouter(
           ),
         },
       ],
+    },
+    {
+      path: "login",
+      element: (
+        <GuestRoute>
+          <Login />
+        </GuestRoute>
+      ),
+    },
+    {
+      path: "register",
+      element: (
+        <GuestRoute>
+          <Register />
+        </GuestRoute>
+      ),
     },
     {
       path: "*",
