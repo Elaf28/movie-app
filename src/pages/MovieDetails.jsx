@@ -21,7 +21,7 @@ function MovieDetails() {
 
   return (
     <>
-      <Container className="pt-30 pb-8">
+      <Container className="pt-26 pb-8">
         <div className="w-full">
           <MovieTrailerPlayer movieId={id} movie={movie} />
         </div>

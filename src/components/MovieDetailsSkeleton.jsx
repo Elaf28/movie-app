@@ -12,7 +12,7 @@ function MovieDetailsSkeleton() {
         <MovieTrailerPlayerSkeleton />
       </div>
 
-      <Container className="py-3 md:py-6 lg:py-10">
+      <Container className="pt-26 pb-8">
         <div className="relative mt-6 grid grid-cols-1 gap-4 lg:mt-4 lg:grid-cols-[300px_1fr] lg:gap-8">
           <div className="flex flex-row-reverse justify-between gap-4 lg:relative lg:block">
             <div className="w-[150px] lg:sticky lg:top-20 lg:w-full">
